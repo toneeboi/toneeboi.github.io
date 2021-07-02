@@ -1,0 +1,10 @@
+FONTS USED
+
+Add font files with related font-face css at-rules
+
+The chosen fonts Montserrat, Lora, and Fira were added to the
+/assets/fonts/ folder. The corresponding at-rules were defined in 
+styles.css.
+
+These are temporary and need to be improved by using the Google
+Fonts API.
