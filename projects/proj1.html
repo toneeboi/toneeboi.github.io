@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/stylesheets/styles.css" />
+    <title>
+      Tonee L. Bayhon - Identifying Land Use and Flood Risk Using Land
+      Classification
+    </title>
+  </head>
+  <body>
+    <section class="navbar fullGrid" id="proj-navbar">
+      <div class="navBack iconFlat" id="proj-navBack">
+        <a href="/index.html#project1"><span class="icon iconBack"></span></a>
+      </div>
+      <div
+        class="navTitle"
+        id="proj-navTitle"
+        onclick="window.location.href='/index.html'"
+      >
+        TONEE L. BAYHON
+      </div>
+      <div class="navMenu iconFlat" id="proj-navMenu">
+        <span class="icon iconMenu"></span>
+      </div>
+    </section>
+    <section class="contentGrid">
+      <div class="projTitle">
+        Identifying Land Use and Flood Risk Using Land Classification
+      </div>
+      <div class="projContent contGrid1">
+        <div class="item0 contGrid1-0">
+          <div class="subTitleBox1 contGrid1-0h">
+            <span class="subTitle1 contGrid1-0h0">Summary</span>
+          </div>
+          <div class="text1 contGrid1-0c">
+            It is a well-known and accepted fact that deforestation can lead to
+            flooding. This phenomenon is exacerbated when the water flows
+            through a steep slope which may bring with it debris such as tree
+            branches, garbage, and mud, exacerbating the effects of floods.
+            <br /><br />
+            Unfortunately, policymakers firstly, have considered this event of
+            flooding as isolated and thus are not pressed for creating policies
+            in order to prevent this economic and life-threatening phenomenon.
+            However, should a case be made for any action, leaders need to be
+            guided on how to act.
+            <br /><br />
+            Using <span class="emphasize">DeepLabV3+</span> — a state-of-art
+            deep learning model for semantic image segmentation developed by
+            Google Research — this study determined whether land use can be
+            identified using satellite images.
+          </div>
+        </div>
+        <div class="item0 contGrid1-1">
+          <div class="subTitleBox1 contGrid1-1h">
+            <span class="subTitle1 contGrid1-1h1">Method</span>
+            <span class="contGrid1-1h2">
+              <input type="checkbox" name="1-1h1" id="methodCheck" />
+              <label
+                for="1-1h1"
+                class="more1"
+                id="method"
+                onclick="accordion(this.id)"
+              ></label>
+            </span>
+          </div>
+          <div class="text1 contGrid1-1c methodContent content">
+            In this study, we use the <span class="emphasize">DeepLabV3+</span>.
+            DeepLab is a state-of-art deep learning model for semantic image
+            segmentation, where the goal is to assign semantic labels to every
+            pixel in the input image. Deep lab was developed by Google Research
+            and at the core of all its versions v1, v2, v3, and now v3+ is the
+            <span class="emphasize">Atrous Convolution</span>. Atrous
+            Convolution can keep the stride constant but with larger
+            field-of-view without increasing the number of parameters or the
+            amount of computation. This is especially significant in the study
+            that I want to do given that the land area can be varied as well as
+            the height of the image from the ground. So, we want to be able to
+            take those factors into consideration. And finally, we can have
+            larger output feature map which is good for semantic segmentation.
+            What is new with the v3+ is the Encoder-Decoder Architecture. The
+            <span class="emphasize">Decoder module</span> refines the
+            segmentation results especially along object boundaries.
+            Furthermore, in this encoder-decoder structure one can arbitrarily
+            control the resolution of extracted encoder features by atrous
+            convolution to trade-off precision and runtime. <br /><br />
+            <img
+              src="/assets/images/proj1/method1.png"
+              alt=""
+              class="contImg"
+            />
+            <br /><br />
+            The training dataset was obtained from the application of the
+            DeepLabV3+ by Ashwath, Balraj.3 It comprises of 723 RGB satellite
+            images for training and 80 for validation along with their
+            corresponding ground truth masks.
+          </div>
+        </div>
+        <div class="item0 contGrid1-1">
+          <div class="subTitleBox1 contGrid1-1h">
+            <span class="subTitle1 contGrid1-1h1">Results</span>
+            <span class="contGrid1-1h2">
+              <input type="checkbox" name="1-1h1" id="resultCheck" />
+              <label
+                for="1-1h1"
+                class="more1"
+                id="result"
+                onclick="accordion(this.id)"
+              ></label>
+            </span>
+          </div>
+          <div class="text1 contGrid1-1c resultContent content">
+            <img
+              src="/assets/images/proj1/map_mask.png"
+              alt=""
+              class="contImg"
+            />
+            <br /><br />
+            As we can see from the image above, the model was able to correctly
+            identify most areas as agricultural land. It was also able to
+            correctly identify a considerable amount of the houses and roads as
+            urban, as well as certain ponds as water. Moreover, the model was
+            also able to identify empty lots as barren areas. And while we have
+            thick and closely planted trees especially on the lower-right of the
+            image, it still classified this as agricultural land. Interestingly,
+            the model identified rice paddies as water as well. Given that the
+            result is just a stitch of the resulting masks, it is noticeable
+            that while there are some areas that are connected across each
+            square image, it is also patchy such that unnatural line end for
+            each square image.
+          </div>
+        </div>
+        <div class="item0 contGrid1-1">
+          <div class="subTitleBox1 contGrid1-1h">
+            <span class="subTitle1 contGrid1-1h1">Industry Applications</span>
+            <span class="contGrid1-1h2">
+              <input type="checkbox" name="1-1h1" id="methodCheck" />
+              <label
+                for="1-1h1"
+                class="more1"
+                id="method"
+                onclick="accordion(this.id)"
+              ></label>
+            </span>
+          </div>
+          <div class="text1 contGrid1-1c methodContent content"></div>
+        </div>
+        <!-- <div class="item0 contGrid1-2">
+          <div class="subTitleBox1 contGrid1-2h">
+            <span class="subTitle1 contGrid1-2h1">Header1-2</span>
+            <span class="contGrid1-2h2">
+              <input type="checkbox" name="1-2h1" id="1-2h1Check" />
+              <label
+                for="1-2h1"
+                class="more1"
+                id="1-2h1"
+                onclick="accordion(this.id)"
+              ></label>
+            </span>
+          </div>
+          <div class="item2 contGrid1-2c 1-2h1Content content">
+            <div class="subTitleBox2 contGrid1-2ch">
+              <span class="subTitle2 contGrid1-2ch1">Header1-2a</span>
+              <span class="contGrid1-2ch2">
+                <input type="checkbox" name="1-2ch2a" id="1-2ch2aCheck" />
+                <label
+                  for="1-2ch2a"
+                  class="more1"
+                  id="1-2ch2a"
+                  onclick="accordion(this.id)"
+                ></label>
+              </span>
+            </div>
+            <div class="text2 contGrid1-2chc content 1-2ch2aContent">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed
+              porro pariatur totam magnam magni dolore eum recusandae quibusdam
+              qui aspernatur nemo, labore mollitia, ducimus quam ut cum. Minima,
+              odio tenetur.
+            </div>
+          </div>
+          <div class="item1 contGrid1-2c 1-2h1Content content">
+            <div class="subTitleBox2 contGrid1-2ch">
+              <span class="subTitle2 contGrid1-2ch1">Header1-2b</span>
+              <span class="contGrid1-2ch2">
+                <input type="checkbox" name="1-2ch2b" id="1-2ch2bCheck" />
+                <label
+                  for="1-2ch2b"
+                  class="more1"
+                  id="1-2ch2b"
+                  onclick="accordion(this.id)"
+                ></label>
+              </span>
+            </div>
+            <div class="text2 contGrid1-2chc content 1-2ch2bContent">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed
+              porro pariatur totam magnam magni dolore eum recusandae quibusdam
+              qui aspernatur nemo, labore mollitia, ducimus quam ut cum. Minima,
+              odio tenetur.
+            </div>
+          </div>
+        </div> -->
+      </div>
+
+      <!-- <div class="projSummary contentGrid1">
+        <span class="subTitle1 contentGrid1-1">Summary</span>
+        <span class="content contentGrid1-2">
+          It is a well-known and accepted fact that deforestation can lead to
+          flooding. This phenomenon is exacerbated when the water flows through
+          a steep slope. In fact, this may even bring with is debris such as
+          tree branches, garbage, and mud.</span
+        >
+        <div class="subTitleBox contentGrid1-1">
+          <span class="subTitle">Background</span>
+        </div>
+        <span class="content contentGrid1-2">
+          It is a well-known and accepted fact that deforestation can lead to
+          flooding. This phenomenon is exacerbated when the water flows through
+          a steep slope. In fact, this may even bring with is debris such as
+          tree branches, garbage, and mud.</span
+        >
+        <span class="subTitle1 contentGrid1-1">Method</span>
+        <span class="content contentGrid1-2">
+          It is a well-known and accepted fact that deforestation can lead to
+          flooding. This phenomenon is exacerbated when the water flows through
+          a steep slope. In fact, this may even bring with is debris such as
+          tree branches, garbage, and mud.</span
+        >
+        <span class="subTitle1 contentGrid1-1">Model and Training Dataset</span>
+        <span class="content contentGrid1-2">
+          It is a well-known and accepted fact that deforestation can lead to
+          flooding. This phenomenon is exacerbated when the water flows through
+          a steep slope. In fact, this may even bring with is debris such as
+          tree branches, garbage, and mud.</span
+        >
+        <span class="subTitle1 contentGrid1-1">The Dataset</span>
+        <span class="content contentGrid1-2">
+          It is a well-known and accepted fact that deforestation can lead to
+          flooding. This phenomenon is exacerbated when the water flows through
+          a steep slope. In fact, this may even bring with is debris such as
+          tree branches, garbage, and mud.</span
+        >
+        <span class="subTitle1 contentGrid1-1">Results</span>
+        <span class="content contentGrid1-2">
+          <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+          </ul>
+        </span>
+        <span class="subTitle1 contentGrid1-1">Business Applications</span>
+        <span class="content contentGrid1-2">
+          It is a well-known and accepted fact that deforestation can lead to
+          flooding. This phenomenon is exacerbated when the water flows through
+          a steep slope. In fact, this may even bring with is debris such as
+          tree branches, garbage, and mud.</span
+        >
+      </div> -->
+    </section>
+    <script src="/assets/scripts/script.js"></script>
+  </body>
+</html>

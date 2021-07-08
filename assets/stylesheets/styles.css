@@ -8,7 +8,7 @@
   --primary-dark-t: rgba(63, 89, 76, 0.3);
   --primary-dark-t2: rgba(63, 89, 76, 0.15);
   --secondary: rgb(186, 155, 121);
-  --secondary-light: rgb(200, 178, 161);
+  --secondary-light: rgb(236, 222, 208);
   --secondary-dark: rgb(131, 99, 66);
 
   /* Measurements */
@@ -214,7 +214,7 @@ body {
 /* #region ---GRIDS CREATION--- */
 .fullGrid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: auto 1fr;
   column-gap: 0;
   row-gap: 0;
   margin: 0;
@@ -242,30 +242,32 @@ body {
 /* #endregion */
 
 /* #region ---GRID ASSIGNMENTS--- */
-.navTitle {
-  grid-column: 1/4;
+.navBack {
+  grid-column: 1/2;
 }
 
-.grid1-1a {
-  grid-area: a;
+#main-navTitle {
+  grid-column: 1/8;
 }
 
-.grid1-1b {
-  grid-area: b;
+#proj-navTitle {
+  grid-column: 2/8;
+}
+
+.navMenu {
+  grid-column: 8/9;
+}
+
+.contentGrid {
   display: grid;
-  grid-template-rows: 1fr 1fr;
-  gap: 1vmin;
-  grid-template-areas:
-    "a"
-    "b";
+  grid-template-rows: auto 1fr;
+  margin-bottom: 6vw;
 }
 
-.grid1-1ba {
-  grid-area: a;
-}
-
-.grid1-1bb {
-  grid-area: b;
+.contGrid1 {
+  grid-row: 2/3;
+  display: grid;
+  grid-template-rows: auto 1fr;
 }
 
 /* #region ---SECTION DESIGN--- */
@@ -274,14 +276,18 @@ body {
   overflow-x: hidden;
   font-family: "Lora";
   color: var(--primary-dark);
-  font-size: 0.7em;
+  font-size: 0.8em;
+}
+
+a {
+  color: var(--primary-dark);
 }
 
 .sectionTitle {
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 400;
-  font-size: 3vmax;
+  font-size: 1.5em;
 }
 
 
@@ -290,13 +296,54 @@ body {
   background-color: var(--primary-dark-t);
   padding: 1vmin;
   z-index: 99;
-  display: none;
 }
 
 #main-navTitle {
   transition: var(--slowtransition);
 }
 
+.icon {
+  display: inline-block;
+  width: 7vw;
+  height: 7vw;
+  background-size: cover;
+  margin: 0 0.5vw;
+}
+
+.iconBack {
+  background-image: url("/assets/icons/arrow_back.svg");
+  transition: var(--fasttransition);
+}
+
+.iconBack:hover,
+.iconBack:focus {
+  background-image: url("/assets/icons/arrow_back_highlight.svg");
+  transition: var(--fasttransition);
+}
+
+/* .iconMenu {
+  background-image: url("/assets/icons/menu.svg");
+  transition: var(--fasttransition);
+}
+
+.iconMenu:hover,
+.iconMenu:focus {
+  background-image: url("/assets/icons/menu_highlight.svg");
+  transition: var(--fasttransition);
+} */
+
+#proj-navTitle {
+  display: flex;
+  align-items: center;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 5vw;
+  margin-left: 1vw;
+}
+
+/* #region ---INDEX--- */
+/* #region Intro */
 /* Intro Background */
 #main-intro {
   background-image: url("/assets/images/main_bg.jpg");
@@ -309,7 +356,6 @@ body {
   position: relative;
 }
 
-/* #region intro */
 #mainText {
   display: block;
   position: absolute;
@@ -381,6 +427,126 @@ h2 {
   width: 100%;
 }
 
+.projectCardDesc {
+  margin: 1em;
+}
+
+/* #endregion */
+/* #endregion */
+
+/* #region Project Page Content */
+.projTitle {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.8em;
+  text-align: center;
+  padding: 10vw 5vw;
+  background-color: var(--secondary-light);
+}
+
+.projContent {
+  padding: 0 5vw;
+  text-align: justify;
+}
+
+.subTitle1 {
+  font-family: "Montserrat";
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.5em;
+}
+
+.subTitle2 {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.6em;
+}
+
+.subTitleBox1 {
+  padding: 3vw 6vw;
+}
+
+.subTitleBox2 {
+  padding: 0 6vw 3vw 6vw;
+}
+
+.item0 {
+  background-color: var(--blank);
+  box-shadow: 0 4vmin 4vmin -2vmin var(--primary-dark-t);
+  margin-top: 6vw;
+}
+
+.item1 {
+  background-color: var(--blank);
+  box-shadow: 0 4vmin 4vmin -2vmin var(--primary-dark-t);
+  margin-top: 3vw;
+}
+
+.item2 {
+  background-color: var(--blank);
+  box-shadow: 0 4vmin 4vmin -2vmin var(--primary-dark-t);
+  /* margin-top: 3vw; */
+}
+
+.text1 {
+  margin: 0 6vw 6vw 6vw;
+}
+
+.text2 {
+  margin: 0 6vw 6vw 6vw;
+}
+
+.content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+
+.more1 {
+  content: url("/assets/icons/expand_more.svg");
+  float: right;
+  transition: 0.2s;
+}
+
+.more1:hover {
+  background-color: var(--primary-light);
+  border-radius: 50%;
+}
+
+.active {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+  transition: 0.2s;
+}
+
+.more2 {
+  content: url("/assets/icons/unfold_more.svg");
+  float: right;
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+.ready:hover {
+  background-color: var(--primary-light);
+}
+
+.emphasize {
+  font-weight: bold;
+}
+
+.contImg {
+  max-width: 100%;
+}
+
+#main-navbar {
+  display: none;
+}
+
 /* #endregion */
 
 /* #region */
@@ -392,19 +558,50 @@ h2 {
 } */
 
 /* Small Devices, Tablets */
-@media screen and (min-width : 768px) {}
-
-/* Medium Devices, Desktops */
-/* @media screen and (min-width : 992px) {} */
-
-/* Large Devices, Wide Screens */
-@media screen and (min-width : 1200px) {
+@media screen and (min-width : 768px) {
   body {
     font-size: 1em;
   }
 
+  .icon {
+    width: 3vh;
+    height: 3vh;
+  }
+
+  #proj-navTitle {
+    font-size: 3vh;
+  }
+
   .navbar {
     padding: 0.5vmin;
+
+  }
+
+  .contentGrid {
+    margin: 0 10vw;
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    grid-template-rows: unset;
+  }
+
+  .projTitle {
+    font-size: 1.8em;
+    grid-column: 1/2;
+  }
+
+  .projContent {
+    padding: 0 5vw;
+    text-align: justify;
+  }
+
+  .text1 {
+    margin: 0 5vw 5vw 5vw;
+  }
+
+  .contGrid1 {
+    grid-row: unset;
+    display: grid;
+    grid-template-rows: auto 1fr;
   }
 
   .grid1 {
@@ -432,18 +629,41 @@ h2 {
   }
 
   .projectCardTitle {
-    font-size: 1.25vmax;
+    font-size: 1.5em;
+  }
+
+  .projectCardImg {
+    text-align: center;
   }
 
   .projectCardImg img {
-    max-width: 10vw;
+    display: block;
+    margin: auto;
+    max-width: 15vw;
+  }
+
+  .subTitleBox1 {
+    padding: 5vh 5vh 2vh 5vh;
+  }
+
+  .subTitle1 {
+    font-size: 1.25em;
+  }
+
+  .text1 {
+    margin: 0 5vh 5vh 5vh;
+  }
+
+  .item0 {
+    margin-top: 3vh;
   }
 }
 
-/* 
-#main-intro {
-  display: none;
-} */
+/* Medium Devices, Desktops */
+/* @media screen and (min-width : 992px) {} */
+
+/* Large Devices, Wide Screens */
+@media screen and (min-width : 1200px) {}
 
 /* #endregion */
 
