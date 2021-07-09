@@ -533,6 +533,7 @@ input[type=checkbox] {
 
 .ready:hover {
   background-color: var(--primary-light);
+  transition: 0.2s;
 }
 
 .emphasize {
