@@ -534,6 +534,7 @@ input[type=checkbox] {
 .ready:hover {
   background-color: var(--primary-light);
   transition: 0.2s;
+
 }
 
 .emphasize {
@@ -548,7 +549,38 @@ input[type=checkbox] {
   display: none;
 }
 
+ol {
+  padding-left: 3vw;
+  list-style-type: decimal;
+}
+
 /* #endregion */
+
+/* Tables */
+table {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  text-indent: initial;
+  table-layout: fixed;
+}
+
+th {
+  text-align: center;
+  padding: 0.25em 0.5em;
+}
+
+td {
+  padding: 0.25em 0.5em;
+  text-align: right;
+}
+
+td .right {
+  text-align: left;
+}
 
 /* #region */
 /* Custom, iPhone Retina */
