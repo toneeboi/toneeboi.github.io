@@ -396,6 +396,16 @@ h2 {
   color: var(--blank);
 }
 
+h3 {
+  margin-top: 2vmax;
+  margin-bottom: 1vmax;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2vmax;
+  color: var(--secondary);
+}
+
 /* #endregion */
 
 /* Projects */
@@ -545,6 +555,22 @@ input[type=checkbox] {
   max-width: 100%;
 }
 
+.eqImg {
+  max-width: 75%;
+}
+
+.eqImg2 {
+  max-width: 60%;
+}
+
+.eqImg2 {
+  width: 40%;
+}
+
+.centerImg {
+  text-align: center;
+}
+
 #main-navbar {
   display: none;
 }
@@ -552,6 +578,10 @@ input[type=checkbox] {
 ol {
   padding-left: 3vw;
   list-style-type: decimal;
+}
+
+ul {
+  padding-left: 3vw;
 }
 
 /* #endregion */
@@ -566,6 +596,7 @@ table {
   border-spacing: 0;
   text-indent: initial;
   table-layout: fixed;
+  font-size: 0.75em;
 }
 
 th {
@@ -594,6 +625,12 @@ td .right {
 @media screen and (min-width : 768px) {
   body {
     font-size: 1em;
+  }
+
+  h3 {
+    margin-top: 2vmin;
+    margin-bottom: 1vmin;
+    font-size: 2vmin;
   }
 
   .icon {
@@ -690,6 +727,15 @@ td .right {
   .item0 {
     margin-top: 3vh;
   }
+
+  table {
+    font-size: 1em;
+  }
+
+  .contImg {
+    max-width: 100%;
+  }
+
 }
 
 /* Medium Devices, Desktops */

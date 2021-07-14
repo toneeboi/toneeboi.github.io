@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/stylesheets/styles.css" />
+    <title>
+      Tonee L. Bayhon - Breast & Lung Cancer DNA Sequences: A Case Study
+    </title>
+  </head>
+  <body>
+    <section class="navbar fullGrid" id="proj-navbar">
+      <div class="navBack iconFlat" id="proj-navBack">
+        <a href="/index.html#project1"><span class="icon iconBack"></span></a>
+      </div>
+      <div
+        class="navTitle"
+        id="proj-navTitle"
+        onclick="window.location.href='/index.html'"
+      >
+        TONEE L. BAYHON
+      </div>
+      <div class="navMenu iconFlat" id="proj-navMenu">
+        <span class="icon iconMenu"></span>
+      </div>
+    </section>
+    <section class="contentGrid">
+      <div class="projTitle">
+        Breast & Lung Cancer DNA Sequences: A Case Study
+      </div>
+      <div class="projContent contGrid1">
+        <div class="item0 contGrid1-0">
+          <div class="subTitleBox1 contGrid1-0h">
+            <span class="subTitle1 contGrid1-0h0">Summary</span>
+          </div>
+          <div class="text1 contGrid1-0c">
+            Cancer is a leading cause of death worldwide with breast and lung
+            cancer leading the rest of all other forms of cancer. This is
+            generally understood to be caused by DNA mutations as an effect of
+            failure in the safeguards of replication, transcription, and
+            translation. With the abundance of DNA sequences available, we are
+            looking to characterize breast and lung cancer DNA sequences using
+            network science. This study shows that mutated alleles are generally
+            similar to each other in their network properties while noticeably
+            distinct from the normal DNA sequence. This opens more opportunities
+            in using network science tools in identifying DNA mutations
+            especially pathogenic ones.
+          </div>
+        </div>
+        <div class="item0 contGrid1-1">
+          <div class="subTitleBox1 contGrid1-1h">
+            <span class="subTitle1 contGrid1-1h1">Method</span>
+            <span class="contGrid1-1h2">
+              <input type="checkbox" name="1-1h1" id="methodCheck" />
+              <label
+                for="1-1h1"
+                class="more1"
+                id="method"
+                onclick="accordion(this.id)"
+              ></label>
+            </span>
+          </div>
+          <div class="text1 contGrid1-1c methodContent content">
+            The methods described in this section was inspired by the approach
+            of Babič, et al (2020). They created a novel technique of
+            characterizing DNA sequences of Lung Cancer in terms of their
+            network metrics. To briefly describe, with their method, they built
+            a network by creating an Archimedean spiral for each nucleotide (A,
+            G, C and T). Each Archimedean spiral would have an angle and length
+            based on the number of nucleotides. The higher the number of a
+            particular nucleotide within the sequence, the wider the angle for
+            each step and thus would lead to a longer spiral. Lastly, they got
+            network metrics and compared the normal gene sequence and the
+            pathological sequences. On the next sections, we will describe how
+            we implemented our own methodology and how it differed. Our
+            methodology differs as we created a single Archimedean spiral
+            sequentially instead of creating multiple per nucleotide. Also, our
+            methodology was used to characterize Lung Cancer DNA sequences (in
+            particular HIF1- 𝛼) and Breast Cancer DNA sequences (BRACA1 and
+            BRACA2).
+            <h3>Building an Archimedean spiral from DNA Sequences</h3>
+            To create an Archimedean spiral using DNA Sequences, we will first
+            define how an Archimedean spiral is defined. The points that lie in
+            the spiral are presented in the polar coordinate system. Each point
+            is located based on the distance (𝑟) and angle (𝜙) from the origin
+            of the system. That is why in a polar coordinate system, we have two
+            coordinates, (𝑟, 𝜙). Lastly, the Archimedean spiral is defined in
+            this paper using Equation (1) and Equation (2) for each
+            corresponding coordinates. <br /><br />
+            <img
+              src="/assets/images/proj3/eq1-2.png"
+              alt=""
+              class="eqImg centerImg"
+            />
+            <br /><br />
+            Where:
+            <ul>
+              <li>𝑖 ,𝑗 = 𝑝𝑜𝑠𝑖𝑡𝑖𝑜𝑛 𝑜𝑓 𝑡ℎ𝑒 𝑛𝑢𝑐𝑙𝑒𝑜𝑡𝑖𝑑𝑒</li>
+              <li>𝑥𝑗 = 𝑛𝑢𝑐𝑙𝑒𝑜𝑡𝑖𝑑𝑒 𝑎𝑡 𝑝𝑜𝑠𝑖𝑡𝑖𝑜𝑛 𝑗</li>
+              <li>𝑓(𝑥) = 𝑟𝑜𝑡𝑎𝑡𝑖𝑜𝑛𝑎𝑙 𝑎𝑛𝑔𝑙𝑒 𝑜𝑓 𝑡ℎ𝑒 𝑥 𝑛𝑢𝑐𝑙𝑒𝑜𝑡𝑖𝑑𝑒</li>
+            </ul>
+            <br /><br />
+            The rotational angle of each nucleotide is computed using Equation
+            (3): <br />
+            <img
+              src="/assets/images/proj3/eq3.png"
+              alt=""
+              class="eqImg centerImg"
+            />
+            <br /><br />
+            Where 𝑁 refers to the number of that 𝑥 nucleotide type in the
+            sequence. Also, take note that 𝑓(𝐴) + 𝑓(𝐺) + 𝑓(𝐶) + 𝑓(𝑇) would be
+            equal to 2𝜋. To summarize, we created the Archimedean spiral from
+            the DNA sequences by using Equation (1) and Equation (2) to define
+            each of the polar coordinates of each nucleotide. Also, based on
+            Equation (2), the further the nucleotide is on the order of the
+            sequence, the larger its angle be.
+            <h3>
+              Transforming Archimedean Coordinates to Cartesian Coordinates
+            </h3>
+            The next step is to transform the coordinates of each nucleotide to
+            the Cartesian coordinates. That involves using the transformation
+            based on Equation (4). For example, if we apply the process from the
+            previous section to the current section for the first exon if the Β
+            − globin gene of Humans, the result will be found in Figure 1.
+            <br />
+            <img
+              src="/assets/images/proj3/eq4.png"
+              alt=""
+              class="eqImg2 centerImg"
+            />
+            <br /><br />
+            Figure 1: Archimedean spiral Representation on the Cartesian Plane
+            <br />
+            <img
+              src="/assets/images/proj3/fig1.png"
+              alt=""
+              class="contImg centerImg"
+            />
+            <h3>Defining Nodes and Edges</h3>
+            Each nucleotide within the cartesian coordinate system will now
+            represent a node. Nodes that have the same angle from the origin
+            will be connected together with an edge. Lastly, the closest C and G
+            nucleotide pairs are connected to each other by an edge. The
+            resulting graph can be found in Figure 2.
+            <br /><br />
+            Figure 2: DNA Sequence Network
+            <br />
+            <img
+              src="/assets/images/proj3/fig2.png"
+              alt=""
+              class="contImg centerImg"
+            />
+          </div>
+        </div>
+        <div class="item0 contGrid1-1">
+          <div class="subTitleBox1 contGrid1-1h">
+            <span class="subTitle1 contGrid1-1h1">Results</span>
+            <span class="contGrid1-1h2">
+              <input type="checkbox" name="1-1h1" id="resultCheck" />
+              <label
+                for="1-1h1"
+                class="more1"
+                id="result"
+                onclick="accordion(this.id)"
+              ></label>
+            </span>
+          </div>
+          <div class="text1 contGrid1-1c resultContent content">
+            There were three normal DNA sequences in this study, the BRCA1,
+            BRCA2 and HIF1-𝛼. The first two are related to breast cancer while
+            the last one is related to the lung cancer. We compared each of
+            their network properties to a few of their mutations. The mutations
+            we have chosen here, differ to the original/normal sequence with 1
+            nucleotide only except for one with deletion. The network properties
+            we chose are just simple ones that show how complex and structured
+            the networks are. We used the density, average degree and the number
+            of edges as a measure of how complex the networks are while the
+            average clustering coefficient was used to measure how much
+            clustering or structure are found in the graphs. <br /><br />
+            In the tables below, the first column of values refers to the
+            normal/unmutated gene while the other columns refer to their mutated
+            versions. Looking at all of their densities, you can see that the
+            normal sequences consistently differentiate themselves relatively to
+            their mutated counterparts. Unfortunately, the direction of
+            differences is not consistent as for BRACA1, it is considerably a
+            much denser network compared to its other mutated versions. On the
+            other hand, for BRACA2 and HIF1-𝛼, the normal DNA networks have much
+            less density. Other measures also show this pattern. Also, in
+            general, all of the networks are not that dense considering their
+            average degrees only range from one to three given that the length
+            of the sequences/number of the nodes are around 50,000 and up.
+            <h3>BRCA1 Results</h3>
+            <table border="1" class="dataframe">
+              <thead>
+                <tr style="text-align: right">
+                  <th>Network Properties</th>
+                  <th>BRCA1</th>
+                  <th>rs16941</th>
+                  <th>rs1799950</th>
+                  <th>rs1799966</th>
+                  <th>rs799917</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Density</th>
+                  <td>3.13E-05</td>
+                  <td>1.98E-05</td>
+                  <td>1.98E-05</td>
+                  <td>1.98E-05</td>
+                  <td>1.99E-05</td>
+                </tr>
+                <tr>
+                  <th>Average Degree</th>
+                  <td>2.538645615</td>
+                  <td>1.606044159</td>
+                  <td>1.604169236</td>
+                  <td>1.603009745</td>
+                  <td>1.612483039</td>
+                </tr>
+                <tr>
+                  <th>Edges</th>
+                  <td>102,904</td>
+                  <td>65,101</td>
+                  <td>65,025</td>
+                  <td>64,978</td>
+                  <td>65,362</td>
+                </tr>
+                <tr>
+                  <th>Average Clustering Coefficient</th>
+                  <td>0.468045755</td>
+                  <td>0.247440807</td>
+                  <td>0.246542729</td>
+                  <td>0.246670598</td>
+                  <td>0.251172414</td>
+                </tr>
+              </tbody>
+            </table>
+            <h3>BRCA2 Results</h3>
+            <table border="1" class="dataframe">
+              <thead>
+                <tr style="text-align: right">
+                  <th>Network Properties</th>
+                  <th>BRCA2</th>
+                  <th>32316422-32355288 deletion</th>
+                  <th>rs1060499566</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Density</th>
+                  <td>1.81E-05</td>
+                  <td>1.88E-05</td>
+                  <td>1.85E-05</td>
+                </tr>
+                <tr>
+                  <th>Average Degree</th>
+                  <td>1.533275917</td>
+                  <td>1.596201038</td>
+                  <td>1.563973997</td>
+                </tr>
+                <tr>
+                  <th>Edges</th>
+                  <td>64,981</td>
+                  <td>67,647</td>
+                  <td>66,282</td>
+                </tr>
+                <tr>
+                  <th>Average Clustering Coefficient</th>
+                  <td>0.253185043</td>
+                  <td>0.268246562</td>
+                  <td>0.260215656</td>
+                </tr>
+              </tbody>
+            </table>
+            <h3>HIF1-𝛼 Results</h3>
+            <table border="1" class="dataframe">
+              <thead>
+                <tr style="text-align: right">
+                  <th>Network Properties</th>
+                  <th>HIF1-𝛼</th>
+                  <th>rs10873142</th>
+                  <th>rs11549465</th>
+                  <th>rs34005929</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Density</th>
+                  <td>2.94E-05</td>
+                  <td>3.00E-05</td>
+                  <td>3.00E-05</td>
+                  <td>2.98E-05</td>
+                </tr>
+                <tr>
+                  <th>Average Degree</th>
+                  <td>1.55033557</td>
+                  <td>1.584309711</td>
+                  <td>1.584613051</td>
+                  <td>1.573124028</td>
+                </tr>
+                <tr>
+                  <th>Edges</th>
+                  <td>40,887</td>
+                  <td>41,783</td>
+                  <td>41,791</td>
+                  <td>41,488</td>
+                </tr>
+                <tr>
+                  <th>Average Clustering Coefficient</th>
+                  <td>0.255334415</td>
+                  <td>0.266114379</td>
+                  <td>0.266127018</td>
+                  <td>0.259331483</td>
+                </tr>
+              </tbody>
+            </table>
+            <br /><br />
+          </div>
+        </div>
+        <div class="item0 contGrid1-1">
+          <div class="subTitleBox1 contGrid1-1h">
+            <span class="subTitle1 contGrid1-1h1"
+              >Conclusions and Recommendations</span
+            >
+            <span class="contGrid1-1h2">
+              <input type="checkbox" name="1-1h1" id="appCheck" />
+              <label
+                for="1-1h1"
+                class="more1"
+                id="app"
+                onclick="accordion(this.id)"
+              ></label>
+            </span>
+          </div>
+          <div class="text1 contGrid1-1c appContent content">
+            In conclusion, we explored a novel analytical approach using
+            Archimedean spirals at characterizing cancer DNA sequences. We found
+            patterns wherein the original (unmutated) DNA sequences
+            distinguished themselves in comparison to their pathological/mutated
+            versions. This is even if the mutated genes just differ to the
+            original one with just one particular gene. What we also found out
+            is that the pathological genes group together in terms of their
+            metrics as they are much closer to each other than the original
+            genes. Lastly, we found that the mutated genes are not necessarily
+            less dense than their normal counterparts. It seems that to
+            differentiate a mutated gene to the normal one, you just have to
+            check if what is denser. Unfortunately, their differences are
+            different from gene to gene.
+            <br /><br />
+            We hypothesize that the normal genes have some distinct structure
+            with their DNA sequences compared to their mutated counterparts. We
+            recommend exploring this underlying structure and potentially
+            understand more how cancers form.
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="/assets/scripts/script.js"></script>
+  </body>
+</html>
