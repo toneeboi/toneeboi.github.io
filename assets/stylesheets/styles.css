@@ -613,6 +613,10 @@ td .right {
   text-align: left;
 }
 
+th .left {
+  text-align: left;
+}
+
 /* #region */
 /* Custom, iPhone Retina */
 /* @media screen and (min-width : 320px) {} */
