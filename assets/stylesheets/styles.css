@@ -547,8 +547,12 @@ input[type=checkbox] {
 
 }
 
-.emphasize {
+.strong {
   font-weight: bold;
+}
+
+.em {
+  font-style: italic;
 }
 
 .contImg {
@@ -597,6 +601,7 @@ table {
   text-indent: initial;
   table-layout: fixed;
   font-size: 0.75em;
+  text-align: left;
 }
 
 th {
