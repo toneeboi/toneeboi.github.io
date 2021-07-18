@@ -555,6 +555,10 @@ input[type=checkbox] {
   font-style: italic;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 .contImg {
   max-width: 100%;
 }
