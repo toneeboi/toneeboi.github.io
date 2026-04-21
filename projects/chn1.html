@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Audio Flashcards</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Audio Flashcards</h1>
+        
+        <div class="card-area">
+            <audio id="audio-player" controls>
+                <source id="audio-source" src="" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <br>
+            <button id="play-btn">Play Audio</button>
+        </div>
+
+        <div class="input-area">
+            <label for="pinyin-input">Pinyin:</label>
+            <input type="text" id="pinyin-input" placeholder="e.g. ni hao or ni3 hao3">
+            
+            <label for="english-input">English:</label>
+            <input type="text" id="english-input" placeholder="e.g. hello">
+            
+            <button id="submit-btn">Submit</button>
+        </div>
+
+        <div id="feedback" class="feedback hidden"></div>
+        
+        <div class="stats">
+            <p>Cards Remaining: <span id="remaining-count">0</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
