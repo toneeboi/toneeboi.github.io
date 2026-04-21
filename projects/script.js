@@ -22,6 +22,19 @@ const masterDeck = [
 
 // 2. App State Variables
 let learningPile = [...masterDeck]; // Start with all cards here
+
+// --- NEW FUNCTION: Randomize the deck ---
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        // Swap the elements
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+// Shuffle the learning pile immediately before starting
+shuffleArray(learningPile);
+
 let currentCard = null;
 
 // 3. UI Elements
