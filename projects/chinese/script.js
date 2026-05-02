@@ -108,23 +108,20 @@ function loadNextCard() {
 function checkAnswer() {
     if (!currentCard) return;
 
-    // 1. Clean the user's input
     const userPinyin = cleanString(pinyinInput.value);
     const userEnglish = cleanString(englishInput.value);
 
-    // 2. Clean the deck answers before comparing
-    const isPinyinCorrect = currentCard.pinyin
-        .map(ans => cleanString(ans))
-        .includes(userPinyin);
-
-    const isEnglishCorrect = currentCard.english
-        .map(ans => cleanString(ans))
-        .includes(userEnglish);
+    const isPinyinCorrect = currentCard.pinyin.map(ans => cleanString(ans)).includes(userPinyin);
+    const isEnglishCorrect = currentCard.english.map(ans => cleanString(ans)).includes(userEnglish);
 
     if (isPinyinCorrect && isEnglishCorrect) {
         // --- CORRECT ANSWER ---
         document.body.classList.add('flash-red');
-        setTimeout(() => { document.body.classList.remove('flash-red'); }, 1000);
+        
+        // SYNC: Remove the flash class at the 4-second mark
+        setTimeout(() => { 
+            document.body.classList.remove('flash-red'); 
+        }, 4000);
 
         audioCardBack.innerText = "Correct!";
         audioCardBack.style.color = "darkred";
@@ -132,6 +129,7 @@ function checkAnswer() {
         
         learningPile.shift(); 
         
+        // Card flips back at 4 seconds
         setTimeout(() => {
             audioCardInner.classList.remove('is-flipped');
             setTimeout(loadNextCard, 400); 
@@ -140,7 +138,11 @@ function checkAnswer() {
     } else {
         // --- INCORRECT ANSWER ---
         document.body.classList.add('flash-green');
-        setTimeout(() => { document.body.classList.remove('flash-green'); }, 1000); 
+        
+        // SYNC: Remove the flash class at the 4-second mark
+        setTimeout(() => { 
+            document.body.classList.remove('flash-green'); 
+        }, 4000); 
 
         audioCardBack.innerText = "Incorrect!\nTry again.";
         audioCardBack.style.color = "darkgreen";
