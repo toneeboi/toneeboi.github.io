@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chinese Audio Flashcards</title>
-    <!-- Bumped to v=3 just to make sure your browser doesn't cache the old one! -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,9 +11,21 @@
         <!-- 1. Header outside the cards -->
         <h1>Audio Flashcards</h1>
         
-        <!-- 2. First separate card for Audio -->
-        <div class="card">
-            <button id="play-btn">🔊 Hear Word</button>
+        <!-- 2. First separate card for Audio (Now a 3D Flip Card) -->
+        <div class="audio-card-container">
+            <div class="card-inner" id="audio-card-inner">
+                
+                <!-- The Front of the Card -->
+                <div class="card-front">
+                    <button id="play-btn">🔊 Hear Word</button>
+                </div>
+                
+                <!-- The Back of the Card -->
+                <div class="card-back">
+                    Correct!
+                </div>
+
+            </div>
         </div>
 
         <!-- 3. Second separate card for Inputs -->
