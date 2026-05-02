@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f5f7; /* Soft gray-blue background */
+    background-color: #f4f5f7;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,46 +8,45 @@ body {
     margin: 0;
 }
 
-/* The single unified white card */
-.card-container {
-    background: white;
-    padding: 40px 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Soft shadow */
-    text-align: center;
+/* Wraps everything in a neat vertical column */
+.app-wrapper {
     width: 100%;
     max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Creates even space between every major section */
+    padding: 20px;
     box-sizing: border-box;
 }
 
 h1 {
-    margin-top: 0;
-    margin-bottom: 25px;
+    text-align: center;
+    margin: 0 0 10px 0;
     color: #000;
 }
 
-/* Matching 160px height for perfect symmetry */
-.audio-section {
-    height: 160px; 
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Centers the button vertically */
-    margin-bottom: 20px;
+/* The style applied to both separate boxes */
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    text-align: center;
 }
 
-.input-section {
-    height: 160px; 
+/* Specific styling to stack the inputs neatly in the second card */
+.input-card {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 10px;
-    margin-bottom: 20px;
+    text-align: left; /* Aligns the labels nicely */
 }
 
-.input-section label {
+.input-card label {
     font-size: 14px;
     color: #333;
-    margin-top: 10px; 
+    font-weight: bold;
+    margin-top: 5px;
 }
 
 input {
@@ -59,14 +58,13 @@ input {
     box-sizing: border-box;
 }
 
-/* Mimics a dark border when clicking an input */
 input:focus {
     outline: none;
     border: 2px solid #000;
 }
 
 button {
-    padding: 12px 20px;
+    padding: 14px 20px;
     background-color: #007bff;
     color: white;
     border: none;
@@ -80,23 +78,23 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Make Submit Button span the whole width */
+/* Makes the standalone Submit Button stretch full width */
 #submit-btn {
     width: 100%;
-    margin-bottom: 20px;
+    margin-top: 5px;
 }
 
 .feedback {
+    text-align: center;
     font-weight: bold;
     min-height: 20px;
-    margin-bottom: 10px;
 }
 
 .hidden {
     visibility: hidden;
 }
 
-/* Pushes stats text to the lower right */
+/* Stats counter neatly pushed to the right side */
 .stats {
     text-align: right;
     color: #555;
@@ -105,11 +103,4 @@ button:hover {
 
 .stats p {
     margin: 0;
-}
-
-/* Mobile Responsiveness for smaller screens */
-@media (max-width: 480px) {
-    .card-container {
-        padding: 30px 15px; 
-    }
 }
