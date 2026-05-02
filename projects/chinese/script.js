@@ -3,7 +3,7 @@ let masterDeck = [];
 let learningPile = [];
 let currentCard = null;
 let preferredVoice = null;
-let isShowingAnswer = false; // New flag to track if we are in "Next" mode
+let isShowingAnswer = false; 
 
 // 2. UI Elements
 const audioCardInner = document.getElementById('audio-card-inner'); 
@@ -16,7 +16,7 @@ const displayEnglish = document.getElementById('display-english');
 const playBtn = document.getElementById('play-btn');
 const pinyinInput = document.getElementById('pinyin-input');
 const englishInput = document.getElementById('english-input');
-const submitBtn = document.getElementById('submit-btn'); // This will toggle text
+const submitBtn = document.getElementById('submit-btn'); 
 const feedbackDiv = document.getElementById('feedback');
 const remainingCount = document.getElementById('remaining-count');
 const keys = document.querySelectorAll('.key'); 
@@ -93,7 +93,7 @@ function loadNextCard() {
         feedbackDiv.innerText = "Congratulations! You finished the deck!";
         feedbackDiv.style.color = "green";
         feedbackDiv.classList.remove('hidden');
-        submitBtn.style.display = 'none'; // Hide button when finished
+        submitBtn.style.display = 'none'; 
         return;
     }
     
@@ -103,8 +103,9 @@ function loadNextCard() {
     feedbackDiv.className = "feedback hidden";
     remainingCount.innerText = learningPile.length;
     
-    // Reset Button State
+    // Reset Button State to Submit (Red)
     submitBtn.innerText = "Submit";
+    submitBtn.classList.remove('btn-next'); // This triggers the Blue -> Red transition
     isShowingAnswer = false;
     
     pinyinInput.focus(); 
@@ -119,7 +120,6 @@ function checkAnswer() {
     const isPinyinCorrect = currentCard.pinyin.map(ans => cleanString(ans)).includes(userPinyin);
     const isEnglishCorrect = currentCard.english.map(ans => cleanString(ans)).includes(userEnglish);
 
-    // Update back faces
     displayChars.innerText = currentCard.textToRead;
     displayPinyin.innerText = currentCard.pinyin[0]; 
     displayEnglish.innerText = currentCard.english[0];
@@ -135,27 +135,23 @@ function checkAnswer() {
         setTimeout(() => { document.body.classList.remove('flash-green'); }, 2000); 
         audioCardBack.innerText = "Incorrect!";
         audioCardBack.style.color = "darkgreen";
-        // Re-queue
         const wrongCard = learningPile.shift();
         learningPile.push(wrongCard);
     }
 
-    // Flip Cards & Change Button
+    // Flip Cards
     audioCardInner.classList.add('is-flipped');
     inputCardInner.classList.add('is-flipped');
+    
+    // Change Button to Next (Blue)
     submitBtn.innerText = "Next";
+    submitBtn.classList.add('btn-next'); // This triggers the Red -> Blue transition
     isShowingAnswer = true;
 }
 
-/**
- * Handles the manual transition to the next card
- */
 function handleNext() {
-    // Flip cards back first
     audioCardInner.classList.remove('is-flipped');
     inputCardInner.classList.remove('is-flipped');
-
-    // Wait for flip animation to finish before loading data
     setTimeout(loadNextCard, 400);
 }
 
@@ -169,7 +165,6 @@ submitBtn.addEventListener('click', () => {
     }
 });
 
-// Allow 'Enter' key to handle both Submit and Next
 window.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         if (isShowingAnswer) {
@@ -182,7 +177,7 @@ window.addEventListener('keypress', (e) => {
 
 keys.forEach(key => {
     key.addEventListener('click', (e) => {
-        if (isShowingAnswer) return; // Disable keyboard when showing answer
+        if (isShowingAnswer) return; 
         const char = e.target.innerText;
         const startPos = pinyinInput.selectionStart;
         pinyinInput.value = pinyinInput.value.substring(0, startPos) + char + pinyinInput.value.substring(startPos);
