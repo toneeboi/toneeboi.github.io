@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color: #f4f5f7; /* Soft gray-blue background */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,65 +8,65 @@ body {
     margin: 0;
 }
 
-/* Main wrapper to hold everything in a column */
-.app-wrapper {
+/* The single unified white card */
+.card-container {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Soft shadow */
+    text-align: center;
     width: 100%;
     max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Adds space between all elements */
-    padding: 20px;
     box-sizing: border-box;
 }
 
-.main-header {
-    text-align: center;
-    margin: 0 0 10px 0;
+h1 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #000;
+}
+
+.audio-section {
+    margin-bottom: 25px;
+}
+
+/* Centers the labels and stacks the inputs */
+.input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input-section label {
+    font-size: 14px;
     color: #333;
-}
-
-/* The new Card style */
-.card {
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-/* Layout for inputs inside Card 2 */
-.input-card {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    text-align: center; /* Centers the labels like in your image */
-    gap: 8px;
+    margin-top: 10px; /* Gives space above each label */
 }
 
 input {
     padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 6px;
     font-size: 16px;
     width: 100%;
     box-sizing: border-box;
 }
 
-/* Button Styling */
+/* Mimics the dark border when clicking an input like in your image */
+input:focus {
+    outline: none;
+    border: 2px solid #000;
+}
+
 button {
     padding: 12px 20px;
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
-    font-weight: bold;
 }
 
 button:hover {
@@ -76,25 +76,23 @@ button:hover {
 /* Make Submit Button span the whole width */
 #submit-btn {
     width: 100%;
-    margin-top: 5px;
+    margin-bottom: 20px;
 }
 
 .feedback {
-    text-align: center;
     font-weight: bold;
-    min-height: 20px; /* Prevents layout jumping when text appears */
+    min-height: 20px;
+    margin-bottom: 10px;
 }
 
 .hidden {
-    visibility: hidden; /* Using visibility instead of display keeps the spacing intact */
+    visibility: hidden;
 }
 
-/* Push stats to the lower right */
+/* Centered stats at the bottom */
 .stats {
-    text-align: right;
-    color: #555;
+    color: #000;
     font-size: 14px;
-    margin-top: -5px;
 }
 
 .stats p {
