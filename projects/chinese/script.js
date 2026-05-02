@@ -78,11 +78,13 @@ function loadNextCard() {
 function checkAnswer() {
     if (!currentCard) return;
 
+    // 1. Lowercase what the user typed
     const userPinyin = pinyinInput.value.toLowerCase().trim();
     const userEnglish = englishInput.value.toLowerCase().trim();
 
-    const isPinyinCorrect = currentCard.pinyin.includes(userPinyin);
-    const isEnglishCorrect = currentCard.english.includes(userEnglish);
+    // 2. Lowercase every acceptable answer in the deck before comparing them
+    const isPinyinCorrect = currentCard.pinyin.map(ans => ans.toLowerCase()).includes(userPinyin);
+    const isEnglishCorrect = currentCard.english.map(ans => ans.toLowerCase()).includes(userEnglish);
 
     if (isPinyinCorrect && isEnglishCorrect) {
         // --- CORRECT ANSWER ---
