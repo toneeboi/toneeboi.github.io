@@ -25,9 +25,18 @@ const keys = document.querySelectorAll('.key');
 
 function setVoice() {
     const voices = window.speechSynthesis.getVoices();
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
     preferredVoice = voices.find(voice => 
         voice.lang === 'zh-CN' && voice.name.includes('Google')
     ) || voices.find(voice => voice.lang === 'zh-CN');
+    } else {
+        // Desktop/Laptop: Prioritize Google's Neural voices
+        preferredVoice = voices.find(voice => 
+            voice.lang === 'zh-CN' && voice.name.includes('Google')
+        ) || voices.find(voice => voice.lang === 'zh-CN');
+    }
 }
 
 window.speechSynthesis.onvoiceschanged = setVoice;
@@ -35,9 +44,21 @@ setVoice();
 
 function speakText(text) {
     const utterance = new SpeechSynthesisUtterance(text);
+    
+    // Get all available voices
+    const voices = window.speechSynthesis.getVoices();
+    
+    // Filter for a Google-specific Chinese voice
+    const googleVoice = voices.find(voice => 
+        voice.lang === 'zh-CN' && voice.name.includes('Google')
+    );
+
+    if (googleVoice) {
+        utterance.voice = googleVoice;
+    }
+
     utterance.lang = 'zh-CN'; 
-    utterance.rate = 0.6; 
-    if (preferredVoice) utterance.voice = preferredVoice;
+    utterance.rate = 0.4; 
     window.speechSynthesis.speak(utterance);
 }
 
@@ -45,7 +66,7 @@ function speakText(text) {
 
 function cleanString(str) {
     if (!str) return "";
-    return str.toLowerCase().replace(/[',?!]/g, "").trim();
+    return str.toLowerCase().replace(/[',?!\s]/g, "");
 }
 
 function shuffleArray(array) {
