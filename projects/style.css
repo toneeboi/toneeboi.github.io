@@ -26,14 +26,20 @@ h1 {
     color: #000;
 }
 
+/* Matching 160px height for perfect symmetry */
 .audio-section {
-    margin-bottom: 25px;
+    height: 160px; 
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centers the button vertically */
+    margin-bottom: 20px;
 }
 
-/* Centers the labels and stacks the inputs */
 .input-section {
+    height: 160px; 
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 10px;
     margin-bottom: 20px;
 }
@@ -41,7 +47,7 @@ h1 {
 .input-section label {
     font-size: 14px;
     color: #333;
-    margin-top: 10px; /* Gives space above each label */
+    margin-top: 10px; 
 }
 
 input {
@@ -53,7 +59,7 @@ input {
     box-sizing: border-box;
 }
 
-/* Mimics the dark border when clicking an input like in your image */
+/* Mimics a dark border when clicking an input */
 input:focus {
     outline: none;
     border: 2px solid #000;
@@ -67,6 +73,7 @@ button {
     border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: bold;
 }
 
 button:hover {
@@ -89,12 +96,20 @@ button:hover {
     visibility: hidden;
 }
 
-/* Centered stats at the bottom */
+/* Pushes stats text to the lower right */
 .stats {
-    color: #000;
+    text-align: right;
+    color: #555;
     font-size: 14px;
 }
 
 .stats p {
     margin: 0;
+}
+
+/* Mobile Responsiveness for smaller screens */
+@media (max-width: 480px) {
+    .card-container {
+        padding: 30px 15px; 
+    }
 }
