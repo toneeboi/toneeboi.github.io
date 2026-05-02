@@ -8,9 +8,9 @@ id,textToRead,pinyin,english
 7,姓,xìng;xing4;xìng;xing4,to be surnamed
 8,他,tā;ta1;tā;ta1,he;him
 9,你好,nǐ hǎo;ni3 hao3;nǐhǎo;ni3hao3,hello;hi
-10,你叫什么名字,nǐ jiào shén me míng zì;ni3 jiao4 shen2 me5 ming2 zi4;nǐ jiào shénme míngzì;ni3 jiao4 shen2me5 ming2zi4,what's your name?;what is your name?
-11,他叫什么名字,tā jiào shén me míng zì;ta1 jiao4 shen2 me5 ming2 zi4;tā jiào shénme míngzì;ta1 jiao4 shen2me5 ming2zi4,what's his name?;what is his name?
-12,这,zhè;zhe4;zhè;zhe4,this
+10,你叫什么名字,nǐ jiào shén me míng zi;ni3 jiao4 shen2 me5 ming2 zi5;nǐ jiào shénme míngzi;ni3 jiao4 shen2me5 ming2zi5,what's your name?;what is your name?
+11,他叫什么名字,tā jiào shén me míng zi;ta1 jiao4 shen2 me5 ming2 zi5;tā jiào shénme míngzi;ta1 jiao4 shen2me5 ming2zi5,what's his name?;what is his name?
+12,这,zhè;zhe4;;zhe4,this
 13,是,shì;shi4;shì;shi4,to be
 14,中国人,zhōng guó rén;Zhong1 guo2 ren2;zhōngguó rén;Zhong1guo2 ren2,chinese;chinese person
 15,中国,zhōng guó;Zhong1 guo2;zhōngguó;Zhong1guo2,china
@@ -35,19 +35,19 @@ id,textToRead,pinyin,english
 34,我的,wǒ de;wo3 de5;wǒ de;wo3 de5,mine
 35,我不知道,wǒ bù zhī dào;wo3 bu4 zhi1 dao4;wǒ bù zhīdào;wo3 bu4 zhi1dao4,i don't know;i do not know
 36,谁认识他,shéi rèn shi tā;shei2 ren4 shi5 ta1;shéi rènshi tā;shei2 ren4shi5 ta1,who know him?
-37,准备好了,zhǔn bèi hǎo le;zhun3 bei4 hao3 le5;zhǔnbèi hǎo le;zhun3bei4 hao3 le5,prepared
+37,准备好了,zhǔn bèi hǎo le;zhun3 bei4 hao3 le5;zhǔnbèi hǎo le;zhun3bei4 hao3 le5,prepared;ready
 38,喜欢,xǐ huan;xi3 huan5;xǐhuan;xi3huan5,to like
 39,菲律宾,fēi lǜ bīn;Fei1 lu:4 bin1;fēilǜbīn;Fei1lu:4bin1,Philippines
 40,手机,shǒu jī;shou3 ji1;shǒujī;shou3ji1,cellphone
 41,邮递员,yóu dì yuán;you2 di4 yuan2;yóudìyuán;you2di4yuan2,mailman;postman;courier
-42,请问,qǐng wèn;qing3 wen4;qǐngwèn;qing3wen4,excuse me;may i ask
+42,请问,qǐng wèn;qing3 wen4;qǐngwèn;qing3wen4,Excuse me;may i ask
 43,先生,xiān sheng;xian1 sheng5;xiānsheng;xian1sheng5,mr;mister;sir
 44,吗,ma;ma5;ma;ma5,question
 45,不,bù;bu4;bù;bu4,no;not
 46,这是我的快递,zhè shì wǒ de kuài dì;zhe4 shi4 wo3 de5 kuai4 di4;zhè shì wǒ de kuàidì;zhe4 shi4 wo3 de5 kuai4di4,this is my mail;this is my parcel
 47,快递,kuài dì;kuai4 di4;kuàidì;kuai4di4,express mail;mail;parcel
 48,对不起,duì bu qǐ;dui4 bu5 qi3;duìbuqǐ;dui4bu5qi3,to be sorry;i'm sorry
-49,没关系,méi guān xi;mei2 guan1 xi5;méiguānxi;mei2guan1xi5,it doesnt matter;its alright
+49,没关系,méi guān xi;mei2 guan1 xi5;méiguānxi;mei2guan1xi5,It doesn't matter;It's alright
 50,再见,zài jiàn;zai4 jian4;zàijiàn;zai4jian4,to see you around;see you around;good bye
 51,小姐,xiǎo jie;xiao3 jie5;xiǎojie;xiao3jie5,young lady;miss;ms
 52,女士,nǚ shì;nu:3 shi4;nǚshì;nu:3shi4,lady;madam
