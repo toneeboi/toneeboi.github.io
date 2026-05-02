@@ -33,7 +33,7 @@ const keys = document.querySelectorAll('.key');
 function speakText(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'zh-CN'; 
-    utterance.rate = 0.8; 
+    utterance.rate = 0.4; 
     window.speechSynthesis.speak(utterance);
 }
 
