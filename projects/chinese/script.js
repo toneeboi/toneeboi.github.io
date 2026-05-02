@@ -58,7 +58,7 @@ function speakText(text) {
     }
 
     utterance.lang = 'zh-CN'; 
-    utterance.rate = 0.4; 
+    utterance.rate = 0.6; 
     window.speechSynthesis.speak(utterance);
 }
 
