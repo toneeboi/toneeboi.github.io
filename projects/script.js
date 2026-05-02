@@ -82,12 +82,32 @@ function checkAnswer() {
             setTimeout(loadNextCard, 400); 
         }, 2000);
 
+To change the incorrect answer flash from gray to a dark green vignette, we need to update the colors in your CSS and change the class name in your JavaScript so it makes sense.
+
+Here are the quick updates for both files.
+
+1. Update style.css
+Find the body.flash-gray::before section in your CSS file and replace it entirely with this new body.flash-green::before rule. We will use RGB values for dark green (0, 100, 0) with the same transparency trick to keep the center glow.
+
+CSS
+/* WRONG answers: Dark green vignette fading to transparent edges */
+body.flash-green::before {
+    background: radial-gradient(circle at center, rgba(0, 100, 0, 0.4) 0%, rgba(0, 100, 0, 0) 70%);
+    opacity: 1;
+    transition: opacity 0.1s ease; 
+}
+2. Update script.js
+Now, we just need to tell your JavaScript to use the new "green" class instead of the "gray" one when you get an answer wrong.
+
+Find the checkAnswer() function in your script.js file, look for the else block (the INCORRECT ANSWER section), and update it to this:
+
+JavaScript
     } else {
         // --- INCORRECT ANSWER ---
-        // Flash the background gray
-        document.body.classList.add('flash-gray');
+        // Flash the background dark green
+        document.body.classList.add('flash-green');
         setTimeout(() => {
-            document.body.classList.remove('flash-gray');
+            document.body.classList.remove('flash-green');
         }, 300); 
 
         feedbackDiv.innerText = "Incorrect. Try again!";
