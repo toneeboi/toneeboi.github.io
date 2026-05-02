@@ -1,3 +1,14 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f5f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* --- THE VIGNETTE FLASH OVERLAY --- */
 body::before {
     content: "";
     position: fixed; 
@@ -12,37 +23,20 @@ body::before {
     transition: opacity 0.3s ease; 
 }
 
-/* --- THE NEW VIGNETTE FLASH OVERLAY --- */
-body::before {
-    content: "";
-    position: fixed; /* Covers the whole screen */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Keeps it behind your flashcards */
-    pointer-events: none; /* Ensures it doesn't block your mouse clicks */
-    
-    opacity: 0; /* Invisible by default */
-    transition: opacity 0.3s ease; /* Fades out smoothly */
-}
-
-/* CORRECT answers: Soft red center, darker red edges */
+/* CORRECT answers: Red glow in center fading to transparent edges */
 body.flash-red::before {
-    /* Uses rgba to make the outer 30% of the screen completely transparent */
     background: radial-gradient(circle at center, rgba(255, 100, 100, 0.35) 0%, rgba(255, 100, 100, 0) 70%);
     opacity: 1;
     transition: opacity 0.1s ease; 
 }
 
-/* WRONG answers: Soft gray center, darker gray edges */
+/* WRONG answers: Dark green vignette fading to transparent edges */
 body.flash-green::before {
     background: radial-gradient(circle at center, rgba(0, 100, 0, 0.4) 0%, rgba(0, 100, 0, 0) 70%);
     opacity: 1;
     transition: opacity 0.1s ease; 
 }
 /* -------------------------------------- */
-
 
 .app-wrapper {
     width: 100%;
