@@ -4,54 +4,99 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
 }
 
-.container {
+/* Main wrapper to hold everything in a column */
+.app-wrapper {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Adds space between all elements */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.main-header {
+    text-align: center;
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+/* The new Card style */
+.card {
     background: white;
-    padding: 30px;
+    padding: 25px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     text-align: center;
-    max-width: 400px;
-    width: 100%;
 }
 
-.input-area {
-    margin-top: 20px;
+/* Layout for inputs inside Card 2 */
+.input-card {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    text-align: center; /* Centers the labels like in your image */
+    gap: 8px;
 }
 
 input {
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
+/* Button Styling */
 button {
-    padding: 10px 20px;
+    padding: 12px 20px;
     background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 10px;
+    font-weight: bold;
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
+/* Make Submit Button span the whole width */
+#submit-btn {
+    width: 100%;
+    margin-top: 5px;
+}
+
 .feedback {
-    margin-top: 15px;
+    text-align: center;
     font-weight: bold;
+    min-height: 20px; /* Prevents layout jumping when text appears */
 }
 
 .hidden {
-    display: none;
+    visibility: hidden; /* Using visibility instead of display keeps the spacing intact */
+}
+
+/* Push stats to the lower right */
+.stats {
+    text-align: right;
+    color: #555;
+    font-size: 14px;
+    margin-top: -5px;
+}
+
+.stats p {
+    margin: 0;
 }
