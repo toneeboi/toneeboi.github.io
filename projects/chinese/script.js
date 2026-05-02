@@ -1,4 +1,4 @@
-// 1. Define your flashcards database (Added true Pinyin tones)
+// 1. Define your flashcards database
 const masterDeck = [
     { id: 1, textToRead: "你好", pinyin: ["ni hao", "ni3 hao3", "nǐ hǎo"], english: ["hello", "hi"] },
     { id: 2, textToRead: "谢谢", pinyin: ["xie xie", "xie4 xie", "xiè xiè", "xiè xie"], english: ["thank you", "thanks"] },
@@ -20,19 +20,20 @@ let currentCard = null;
 
 // 3. UI Elements
 const audioCardInner = document.getElementById('audio-card-inner'); 
+const audioCardBack = document.getElementById('audio-card-back'); // NEW: Grabs the back of the card
 const playBtn = document.getElementById('play-btn');
 const pinyinInput = document.getElementById('pinyin-input');
 const englishInput = document.getElementById('english-input');
 const submitBtn = document.getElementById('submit-btn');
 const feedbackDiv = document.getElementById('feedback');
 const remainingCount = document.getElementById('remaining-count');
-const keys = document.querySelectorAll('.key'); // Selects all keyboard buttons
+const keys = document.querySelectorAll('.key'); 
 
 // --- Text to Speech ---
 function speakText(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'zh-CN'; 
-    utterance.rate = 0.4; 
+    utterance.rate = 0.8; 
     window.speechSynthesis.speak(utterance);
 }
 
@@ -40,17 +41,13 @@ function speakText(text) {
 keys.forEach(key => {
     key.addEventListener('click', (e) => {
         const char = e.target.innerText;
-        
-        // Find exactly where the cursor currently is in the text box
         const startPos = pinyinInput.selectionStart;
         const endPos = pinyinInput.selectionEnd;
         
-        // Insert the character exactly at the cursor
         pinyinInput.value = pinyinInput.value.substring(0, startPos) 
             + char 
             + pinyinInput.value.substring(endPos, pinyinInput.value.length);
         
-        // Move the cursor right after the newly inserted character
         pinyinInput.focus();
         pinyinInput.setSelectionRange(startPos + 1, startPos + 1);
     });
@@ -78,11 +75,9 @@ function loadNextCard() {
 function checkAnswer() {
     if (!currentCard) return;
 
-    // 1. Lowercase what the user typed
     const userPinyin = pinyinInput.value.toLowerCase().trim();
     const userEnglish = englishInput.value.toLowerCase().trim();
 
-    // 2. Lowercase every acceptable answer in the deck before comparing them
     const isPinyinCorrect = currentCard.pinyin.map(ans => ans.toLowerCase()).includes(userPinyin);
     const isEnglishCorrect = currentCard.english.map(ans => ans.toLowerCase()).includes(userEnglish);
 
@@ -91,8 +86,11 @@ function checkAnswer() {
         document.body.classList.add('flash-red');
         setTimeout(() => { document.body.classList.remove('flash-red'); }, 300);
 
+        // Set the text and spin the card
+        audioCardBack.innerText = "Correct!";
+        audioCardBack.style.color = "darkred";
         audioCardInner.classList.add('is-flipped'); 
-        feedbackDiv.classList.add('hidden'); 
+        
         learningPile.shift(); 
         
         setTimeout(() => {
@@ -105,14 +103,19 @@ function checkAnswer() {
         document.body.classList.add('flash-green');
         setTimeout(() => { document.body.classList.remove('flash-green'); }, 300); 
 
-        feedbackDiv.innerText = "Incorrect. Try again!";
-        feedbackDiv.style.color = "red";
-        feedbackDiv.classList.remove('hidden');
+        // Set the text to incorrect and spin the card!
+        audioCardBack.innerText = "Incorrect!\nTry again.";
+        audioCardBack.style.color = "darkgreen";
+        audioCardInner.classList.add('is-flipped');
 
         const wrongCard = learningPile.shift();
         learningPile.push(wrongCard);
         
-        setTimeout(loadNextCard, 2000);
+        // Wait 2 seconds, flip it back, then load the next card
+        setTimeout(() => {
+            audioCardInner.classList.remove('is-flipped');
+            setTimeout(loadNextCard, 400); 
+        }, 2000);
     }
 }
 
