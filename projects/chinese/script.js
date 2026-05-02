@@ -118,10 +118,10 @@ function checkAnswer() {
         // --- CORRECT ANSWER ---
         document.body.classList.add('flash-red');
         
-        // SYNC: Remove the flash class at the 4-second mark
+        // SYNC: Remove flash class at 2 seconds
         setTimeout(() => { 
             document.body.classList.remove('flash-red'); 
-        }, 4000);
+        }, 2000);
 
         audioCardBack.innerText = "Correct!";
         audioCardBack.style.color = "darkred";
@@ -129,20 +129,20 @@ function checkAnswer() {
         
         learningPile.shift(); 
         
-        // Card flips back at 4 seconds
+        // Card flips back at 2 seconds
         setTimeout(() => {
             audioCardInner.classList.remove('is-flipped');
             setTimeout(loadNextCard, 400); 
-        }, 4000);
+        }, 2000);
 
     } else {
         // --- INCORRECT ANSWER ---
         document.body.classList.add('flash-green');
         
-        // SYNC: Remove the flash class at the 4-second mark
+        // SYNC: Remove flash class at 2 seconds
         setTimeout(() => { 
             document.body.classList.remove('flash-green'); 
-        }, 4000); 
+        }, 2000); 
 
         audioCardBack.innerText = "Incorrect!\nTry again.";
         audioCardBack.style.color = "darkgreen";
@@ -154,7 +154,7 @@ function checkAnswer() {
         setTimeout(() => {
             audioCardInner.classList.remove('is-flipped');
             setTimeout(loadNextCard, 400); 
-        }, 4000);
+        }, 2000);
     }
 }
 
