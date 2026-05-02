@@ -6,20 +6,39 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    transition: background-color 0.3s ease; 
+    /* Removed the old background transition because the overlay handles it now */
 }
 
-/* CORRECT flashes red */
-body.flash-red {
-    background-color: #ffcccc !important;
-    transition: background-color 0.1s ease; 
+/* --- THE NEW VIGNETTE FLASH OVERLAY --- */
+body::before {
+    content: "";
+    position: fixed; /* Covers the whole screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Keeps it behind your flashcards */
+    pointer-events: none; /* Ensures it doesn't block your mouse clicks */
+    
+    opacity: 0; /* Invisible by default */
+    transition: opacity 0.3s ease; /* Fades out smoothly */
 }
 
-/* WRONG flashes gray */
-body.flash-gray {
-    background-color: #cccccc !important;
-    transition: background-color 0.1s ease; 
+/* CORRECT answers: Soft red center, darker red edges */
+body.flash-red::before {
+    background: radial-gradient(circle at center, #ffcccc 0%, #cc8888 100%);
+    opacity: 1;
+    transition: opacity 0.1s ease; /* Snaps in quickly */
 }
+
+/* WRONG answers: Soft gray center, darker gray edges */
+body.flash-gray::before {
+    background: radial-gradient(circle at center, #e6e6e6 0%, #a6a6a6 100%);
+    opacity: 1;
+    transition: opacity 0.1s ease; /* Snaps in quickly */
+}
+/* -------------------------------------- */
+
 
 .app-wrapper {
     width: 100%;
