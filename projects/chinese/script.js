@@ -32,7 +32,7 @@ const keys = document.querySelectorAll('.key'); // Selects all keyboard buttons
 function speakText(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'zh-CN'; 
-    utterance.rate = 0.5; 
+    utterance.rate = 0.4; 
     window.speechSynthesis.speak(utterance);
 }
 
