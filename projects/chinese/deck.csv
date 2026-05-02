@@ -1,0 +1,55 @@
+id,textToRead,pinyin,english
+1,你,nǐ;ni3;nǐ;ni3,you
+2,好,hǎo;hao3;hǎo;hao3,good
+3,我,wǒ;wo3;wǒ;wo3,I;me
+4,叫,jiào;jiao4;jiào;jiao4,to be called;to be named
+5,什么,shén me;shen2 me5;shénme;shen2me5,what
+6,名字,míng zì;ming2 zi4;míngzì;ming2zi4,name
+7,姓,xìng;xing4;xìng;xing4,to be surnamed
+8,他,tā;ta1;tā;ta1,he;him
+9,你好,nǐ hǎo;ni3 hao3;nǐhǎo;ni3hao3,hello;hi
+10,你叫什么名字,nǐ jiào shén me míng zì;ni3 jiao4 shen2 me5 ming2 zi4;nǐ jiào shénme míngzì;ni3 jiao4 shen2me5 ming2zi4,what's your name?;what is your name?
+11,他叫什么名字,tā jiào shén me míng zì;ta1 jiao4 shen2 me5 ming2 zi4;tā jiào shénme míngzì;ta1 jiao4 shen2me5 ming2zi4,what's his name?;what is his name?
+12,这,zhè;zhe4;zhè;zhe4,this
+13,是,shì;shi4;shì;shi4,to be
+14,中国人,zhōng guó rén;Zhong1 guo2 ren2;zhōngguó rén;Zhong1guo2 ren2,chinese;chinese person
+15,中国,zhōng guó;Zhong1 guo2;zhōngguó;Zhong1guo2,china
+16,您,nín;nin2;nín;nin2,you;you (polite)
+17,认识,rèn shi;ren4 shi5;rènshi;ren4shi5,to know
+18,很,hěn;hen3;hěn;hen3,very;quite
+19,高兴,gāo xìng;gao1 xing4;gāoxìng;gao1xing4,happy;glad
+20,也,yě;ye3;yě;ye3,also;too
+21,那,nà;na4;nà;na4,that
+22,谁,shéi;shei2;shéi;shei2,who;whom
+23,哪国人,nǎ guó rén;na3 guo2 ren2;nǎ guórén;na3 guo2ren2,person from which country;what nationality
+24,哪,nǎ;na3;nǎ;na3,which
+25,您好,nín hǎo;nin2 hao3;nínhǎo;nin2hao3,hello;hi;hello (polite);hi (polite)
+26,认识您很高兴,rèn shi nín hěn gāo xìng;ren4 shi5 nin2 hen3 gao1 xing4;rènshi nín hěn gāoxìng;ren4shi5 nin2 hen3 gao1xing4,glad to meet you;i'm glad to meet you
+27,认识您我也很高兴,rèn shi nín wǒ yě hěn gāo xìng;ren4 shi5 nin2 wo3 ye3 hen3 gao1 xing4;rènshi nín wǒ yě hěn gāoxìng;ren4shi5 nin2 wo3 ye3 hen3 gao1xing4,"i'm glad to meet you, too"
+28,那是谁,nà shì shéi;na4 shi4 shei2;nà shì shéi;na4 shi4 shei2,who's that?;who is that?
+29,他是哪国人,tā shì nǎ guó rén;ta1 shi4 na3 guo2 ren2;tā shì nǎ guórén;ta1 shi4 na3 guo2ren2,what's his nationality?;what is his nationality?
+30,老师,lǎo shī;lao3 shi1;lǎoshī;lao3shi1,teacher
+31,学生,xué sheng;xue2 sheng5;xuésheng;xue2sheng5,student
+32,同学,tóng xué;tong2 xue2;tóngxué;tong2xue2,classmate
+33,同学们,tóng xué men;tong2 xue2 men5;tóngxué men;tong2xue2 men5,classmates
+34,我的,wǒ de;wo3 de5;wǒ de;wo3 de5,mine
+35,我不知道,wǒ bù zhī dào;wo3 bu4 zhi1 dao4;wǒ bù zhīdào;wo3 bu4 zhi1dao4,i don't know;i do not know
+36,谁认识他,shéi rèn shi tā;shei2 ren4 shi5 ta1;shéi rènshi tā;shei2 ren4shi5 ta1,who know him?
+37,准备好了,zhǔn bèi hǎo le;zhun3 bei4 hao3 le5;zhǔnbèi hǎo le;zhun3bei4 hao3 le5,prepared
+38,喜欢,xǐ huan;xi3 huan5;xǐhuan;xi3huan5,to like
+39,菲律宾,fēi lǜ bīn;Fei1 lu:4 bin1;fēilǜbīn;Fei1lu:4bin1,Philippines
+40,手机,shǒu jī;shou3 ji1;shǒujī;shou3ji1,cellphone
+41,邮递员,yóu dì yuán;you2 di4 yuan2;yóudìyuán;you2di4yuan2,mailman;postman;courier
+42,请问,qǐng wèn;qing3 wen4;qǐngwèn;qing3wen4,excuse me;may i ask
+43,先生,xiān sheng;xian1 sheng5;xiānsheng;xian1sheng5,mr;mister;sir
+44,吗,ma;ma5;ma;ma5,question
+45,不,bù;bu4;bù;bu4,no;not
+46,这是我的快递,zhè shì wǒ de kuài dì;zhe4 shi4 wo3 de5 kuai4 di4;zhè shì wǒ de kuàidì;zhe4 shi4 wo3 de5 kuai4di4,this is my mail;this is my parcel
+47,快递,kuài dì;kuai4 di4;kuàidì;kuai4di4,express mail;mail;parcel
+48,对不起,duì bu qǐ;dui4 bu5 qi3;duìbuqǐ;dui4bu5qi3,to be sorry;i'm sorry
+49,没关系,méi guān xi;mei2 guan1 xi5;méiguānxi;mei2guan1xi5,it doesnt matter;its alright
+50,再见,zài jiàn;zai4 jian4;zàijiàn;zai4jian4,to see you around;see you around;good bye
+51,小姐,xiǎo jie;xiao3 jie5;xiǎojie;xiao3jie5,young lady;miss;ms
+52,女士,nǚ shì;nu:3 shi4;nǚshì;nu:3shi4,lady;madam
+53,经理,jīng lǐ;jing1 li3;jīnglǐ;jing1li3,manager
+54,大夫,dà fū;da4 fu1;dàfū;da4fu1,doctor

@@ -1,24 +1,9 @@
-// 1. Define your flashcards database
-const masterDeck = [
-    { id: 1, textToRead: "你好", pinyin: ["ni hao", "ni3 hao3", "nǐ hǎo"], english: ["hello", "hi"] },
-    { id: 2, textToRead: "谢谢", pinyin: ["xie xie", "xie4 xie", "xiè xiè", "xiè xie"], english: ["thank you", "thanks"] },
-    { id: 3, textToRead: "再见", pinyin: ["zai jian", "zai4 jian4", "zài jiàn"], english: ["goodbye", "bye"] }
-];
-
-// 2. App State Variables
-let learningPile = [...masterDeck]; 
-
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-}
-
-shuffleArray(learningPile);
+// 1. App State Variables
+let masterDeck = []; // Now starts empty
+let learningPile = [];
 let currentCard = null;
 
-// 3. UI Elements
+// 2. UI Elements
 const audioCardInner = document.getElementById('audio-card-inner'); 
 const audioCardBack = document.getElementById('audio-card-back');
 const playBtn = document.getElementById('play-btn');
@@ -29,11 +14,54 @@ const feedbackDiv = document.getElementById('feedback');
 const remainingCount = document.getElementById('remaining-count');
 const keys = document.querySelectorAll('.key'); 
 
+// --- CSV Parser Logic ---
+async function loadDeckFromCSV() {
+    try {
+        const response = await fetch('deck.csv');
+        const data = await response.text();
+        
+        // Split by lines and remove the header row
+        const rows = data.split('\n').slice(1);
+        
+        masterDeck = rows.map(row => {
+            const columns = row.split(',');
+            if (columns.length < 4) return null;
+
+            return {
+                id: columns[0].trim(),
+                textToRead: columns[1].trim(),
+                // Split the semicolons back into arrays
+                pinyin: columns[2].trim().split(';'),
+                english: columns[3].trim().split(';')
+            };
+        }).filter(card => card !== null); // Remove empty rows
+
+        initGame();
+    } catch (error) {
+        console.error("Error loading CSV:", error);
+        feedbackDiv.innerText = "Error loading vocabulary deck.";
+        feedbackDiv.classList.remove('hidden');
+    }
+}
+
+function initGame() {
+    learningPile = [...masterDeck];
+    shuffleArray(learningPile);
+    loadNextCard();
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
 // --- Text to Speech ---
 function speakText(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'zh-CN'; 
-    utterance.rate = 0.4; // Preserving the slow, clear tone
+    utterance.rate = 0.4; 
     window.speechSynthesis.speak(utterance);
 }
 
@@ -53,22 +81,21 @@ keys.forEach(key => {
     });
 });
 
-// 4. Core Functions
+// --- Core Functions ---
 function loadNextCard() {
     if (learningPile.length === 0) {
         feedbackDiv.innerText = "Congratulations! You finished the deck!";
         feedbackDiv.className = "feedback";
         feedbackDiv.style.color = "green";
+        feedbackDiv.classList.remove('hidden');
         return;
     }
     
     currentCard = learningPile[0];
-    
     pinyinInput.value = "";
     englishInput.value = "";
     feedbackDiv.className = "feedback hidden";
     remainingCount.innerText = learningPile.length;
-    
     pinyinInput.focus(); 
 }
 
@@ -78,11 +105,10 @@ function checkAnswer() {
     const userPinyin = pinyinInput.value.toLowerCase().trim();
     const userEnglish = englishInput.value.toLowerCase().trim();
 
-    const isPinyinCorrect = currentCard.pinyin.map(ans => ans.toLowerCase()).includes(userPinyin);
-    const isEnglishCorrect = currentCard.english.map(ans => ans.toLowerCase()).includes(userEnglish);
+    const isPinyinCorrect = currentCard.pinyin.map(ans => ans.toLowerCase().trim()).includes(userPinyin);
+    const isEnglishCorrect = currentCard.english.map(ans => ans.toLowerCase().trim()).includes(userEnglish);
 
     if (isPinyinCorrect && isEnglishCorrect) {
-        // --- CORRECT ANSWER ---
         document.body.classList.add('flash-red');
         setTimeout(() => { document.body.classList.remove('flash-red'); }, 1000);
 
@@ -92,14 +118,12 @@ function checkAnswer() {
         
         learningPile.shift(); 
         
-        // WAIT TIME: Increased to 4000ms (4 seconds)
         setTimeout(() => {
             audioCardInner.classList.remove('is-flipped');
             setTimeout(loadNextCard, 400); 
         }, 4000);
 
     } else {
-        // --- INCORRECT ANSWER ---
         document.body.classList.add('flash-green');
         setTimeout(() => { document.body.classList.remove('flash-green'); }, 1000); 
 
@@ -110,7 +134,6 @@ function checkAnswer() {
         const wrongCard = learningPile.shift();
         learningPile.push(wrongCard);
         
-        // WAIT TIME: Increased to 4000ms (4 seconds)
         setTimeout(() => {
             audioCardInner.classList.remove('is-flipped');
             setTimeout(loadNextCard, 400); 
@@ -118,19 +141,14 @@ function checkAnswer() {
     }
 }
 
-// 5. Event Listeners
+// --- Event Listeners ---
 playBtn.addEventListener('click', () => {
     if (currentCard) { speakText(currentCard.textToRead); }
 });
 
-englishInput.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') { checkAnswer(); }
-});
-
-pinyinInput.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') { checkAnswer(); }
-});
-
+englishInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkAnswer(); });
+pinyinInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkAnswer(); });
 submitBtn.addEventListener('click', checkAnswer);
 
-loadNextCard();
+// Start by fetching the CSV
+loadDeckFromCSV();
