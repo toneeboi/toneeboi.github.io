@@ -214,3 +214,43 @@ button:hover {
     color: #333;
     font-weight: normal;
 }
+
+.input-card-container {
+    perspective: 1000px;
+    width: 100%;
+}
+
+/* Specific styling for the back of the input card */
+.meaning-display {
+    flex-direction: column;
+    padding: 20px;
+    background: #fff;
+    color: #333;
+}
+
+.meaning-display h2 {
+    font-size: 42px;
+    margin: 0;
+    color: #000;
+}
+
+.meaning-display p {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+#display-pinyin {
+    color: #555;
+    font-style: italic;
+}
+
+#display-english {
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Ensure the back face is properly rotated and hidden */
+.card-back {
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+}
