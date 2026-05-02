@@ -2,6 +2,7 @@
 let masterDeck = []; 
 let learningPile = [];
 let currentCard = null;
+let preferredVoice = null; // Store the Google voice here
 
 // 2. UI Elements
 const audioCardInner = document.getElementById('audio-card-inner'); 
@@ -19,15 +20,41 @@ const feedbackDiv = document.getElementById('feedback');
 const remainingCount = document.getElementById('remaining-count');
 const keys = document.querySelectorAll('.key'); 
 
-// --- Helper Functions ---
+// --- Speech Synthesis Setup ---
 
 /**
- * Normalizes strings. Specifically excludes parentheses from removal 
- * to support notes like "(polite)" or "(formal)".
+ * Finds and caches the Google Mandarin voice.
+ * This runs when voices change or at startup.
  */
+function setVoice() {
+    const voices = window.speechSynthesis.getVoices();
+    // Prioritize the Google-branded Chinese voice for Translate-like quality
+    preferredVoice = voices.find(voice => 
+        voice.lang === 'zh-CN' && voice.name.includes('Google')
+    ) || voices.find(voice => voice.lang === 'zh-CN'); // Fallback to any zh-CN voice
+}
+
+// Attach the listener
+window.speechSynthesis.onvoiceschanged = setVoice;
+// Initial call for browsers where voices might already be loaded
+setVoice();
+
+function speakText(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'zh-CN'; 
+    utterance.rate = 0.4; 
+    
+    if (preferredVoice) {
+        utterance.voice = preferredVoice;
+    }
+    
+    window.speechSynthesis.speak(utterance);
+}
+
+// --- Helper Functions ---
+
 function cleanString(str) {
     if (!str) return "";
-    // Removes standard punctuation but PRESERVES ( )
     return str.toLowerCase().replace(/[',?!]/g, "").trim();
 }
 
@@ -90,13 +117,6 @@ function loadNextCard() {
     pinyinInput.focus(); 
 }
 
-function speakText(text) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'zh-CN'; 
-    utterance.rate = 0.4; // Preserved slow rate for clear tones
-    window.speechSynthesis.speak(utterance);
-}
-
 function checkAnswer() {
     if (!currentCard) return;
 
@@ -106,7 +126,6 @@ function checkAnswer() {
     const isPinyinCorrect = currentCard.pinyin.map(ans => cleanString(ans)).includes(userPinyin);
     const isEnglishCorrect = currentCard.english.map(ans => cleanString(ans)).includes(userEnglish);
 
-    // Update the back of the input card (Ma Shan Zheng font used in CSS)
     displayChars.innerText = currentCard.textToRead;
     displayPinyin.innerText = currentCard.pinyin[0]; 
     displayEnglish.innerText = currentCard.english[0];
@@ -126,11 +145,9 @@ function checkAnswer() {
         learningPile.push(wrongCard);
     }
 
-    // Synchronized flip
     audioCardInner.classList.add('is-flipped');
     inputCardInner.classList.add('is-flipped');
 
-    // Wait exactly 2 seconds before resetting
     setTimeout(() => {
         audioCardInner.classList.remove('is-flipped');
         inputCardInner.classList.remove('is-flipped');
