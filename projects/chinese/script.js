@@ -20,7 +20,7 @@ let currentCard = null;
 
 // 3. UI Elements
 const audioCardInner = document.getElementById('audio-card-inner'); 
-const audioCardBack = document.getElementById('audio-card-back'); // NEW: Grabs the back of the card
+const audioCardBack = document.getElementById('audio-card-back');
 const playBtn = document.getElementById('play-btn');
 const pinyinInput = document.getElementById('pinyin-input');
 const englishInput = document.getElementById('english-input');
@@ -33,7 +33,7 @@ const keys = document.querySelectorAll('.key');
 function speakText(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'zh-CN'; 
-    utterance.rate = 0.4; 
+    utterance.rate = 0.4; // Preserving the slow, clear tone
     window.speechSynthesis.speak(utterance);
 }
 
@@ -84,26 +84,25 @@ function checkAnswer() {
     if (isPinyinCorrect && isEnglishCorrect) {
         // --- CORRECT ANSWER ---
         document.body.classList.add('flash-red');
-        setTimeout(() => { document.body.classList.remove('flash-red'); }, 800);
+        setTimeout(() => { document.body.classList.remove('flash-red'); }, 1000);
 
-        // Set the text and spin the card
         audioCardBack.innerText = "Correct!";
         audioCardBack.style.color = "darkred";
         audioCardInner.classList.add('is-flipped'); 
         
         learningPile.shift(); 
         
+        // WAIT TIME: Increased to 4000ms (4 seconds)
         setTimeout(() => {
             audioCardInner.classList.remove('is-flipped');
             setTimeout(loadNextCard, 400); 
-        }, 2000);
+        }, 4000);
 
     } else {
         // --- INCORRECT ANSWER ---
         document.body.classList.add('flash-green');
-        setTimeout(() => { document.body.classList.remove('flash-green'); }, 800); 
+        setTimeout(() => { document.body.classList.remove('flash-green'); }, 1000); 
 
-        // Set the text to incorrect and spin the card!
         audioCardBack.innerText = "Incorrect!\nTry again.";
         audioCardBack.style.color = "darkgreen";
         audioCardInner.classList.add('is-flipped');
@@ -111,11 +110,11 @@ function checkAnswer() {
         const wrongCard = learningPile.shift();
         learningPile.push(wrongCard);
         
-        // Wait 2 seconds, flip it back, then load the next card
+        // WAIT TIME: Increased to 4000ms (4 seconds)
         setTimeout(() => {
             audioCardInner.classList.remove('is-flipped');
             setTimeout(loadNextCard, 400); 
-        }, 2000);
+        }, 4000);
     }
 }
 
@@ -134,5 +133,4 @@ pinyinInput.addEventListener('keypress', function (e) {
 
 submitBtn.addEventListener('click', checkAnswer);
 
-// Start the app
 loadNextCard();
