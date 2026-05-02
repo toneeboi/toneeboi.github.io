@@ -14,24 +14,27 @@
         <!-- 3D Flip Card for Audio -->
         <div class="audio-card-container">
             <div class="card-inner" id="audio-card-inner">
-                
-                <!-- Front of the Card -->
                 <div class="card-front">
                     <button id="play-btn">🔊 Hear Word</button>
                 </div>
-                
-                <!-- Back of the Card -->
                 <div class="card-back">
                     Correct!
                 </div>
-
             </div>
         </div>
 
         <!-- Input Card -->
         <div class="card input-card">
             <label for="pinyin-input">Pinyin:</label>
-            <input type="text" id="pinyin-input" placeholder="e.g. ni hao or ni3 hao3">
+            <input type="text" id="pinyin-input" placeholder="e.g. nǐ hǎo or ni3 hao3">
+            
+            <!-- NEW: The On-Screen Pinyin Keyboard -->
+            <div class="pinyin-keyboard" id="pinyin-keyboard">
+                <button type="button" class="key">ā</button> <button type="button" class="key">ē</button> <button type="button" class="key">ī</button> <button type="button" class="key">ō</button> <button type="button" class="key">ū</button> <button type="button" class="key">ǖ</button>
+                <button type="button" class="key">á</button> <button type="button" class="key">é</button> <button type="button" class="key">í</button> <button type="button" class="key">ó</button> <button type="button" class="key">ú</button> <button type="button" class="key">ǘ</button>
+                <button type="button" class="key">ǎ</button> <button type="button" class="key">ě</button> <button type="button" class="key">ǐ</button> <button type="button" class="key">ǒ</button> <button type="button" class="key">ǔ</button> <button type="button" class="key">ǚ</button>
+                <button type="button" class="key">à</button> <button type="button" class="key">è</button> <button type="button" class="key">ì</button> <button type="button" class="key">ò</button> <button type="button" class="key">ù</button> <button type="button" class="key">ǜ</button>
+            </div>
             
             <label for="english-input">English:</label>
             <input type="text" id="english-input" placeholder="e.g. hello">
@@ -51,4 +54,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-<!-- yo sup -->
