@@ -8,19 +8,19 @@
 </head>
 <body>
     <div class="app-wrapper">
-        <!-- 1. Header outside the cards -->
+        <!-- Header -->
         <h1>Audio Flashcards</h1>
         
-        <!-- 2. First separate card for Audio (Now a 3D Flip Card) -->
+        <!-- 3D Flip Card for Audio -->
         <div class="audio-card-container">
             <div class="card-inner" id="audio-card-inner">
                 
-                <!-- The Front of the Card -->
+                <!-- Front of the Card -->
                 <div class="card-front">
                     <button id="play-btn">🔊 Hear Word</button>
                 </div>
                 
-                <!-- The Back of the Card -->
+                <!-- Back of the Card -->
                 <div class="card-back">
                     Correct!
                 </div>
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <!-- 3. Second separate card for Inputs -->
+        <!-- Input Card -->
         <div class="card input-card">
             <label for="pinyin-input">Pinyin:</label>
             <input type="text" id="pinyin-input" placeholder="e.g. ni hao or ni3 hao3">
@@ -37,12 +37,12 @@
             <input type="text" id="english-input" placeholder="e.g. hello">
         </div>
 
-        <!-- 4. Submit Button outside the cards -->
+        <!-- Submit Button -->
         <button id="submit-btn">Submit</button>
 
         <div id="feedback" class="feedback hidden"></div>
         
-        <!-- 5. Cards Remaining at the very bottom -->
+        <!-- Stats -->
         <div class="stats">
             <p>Cards Remaining: <span id="remaining-count">0</span></p>
         </div>
