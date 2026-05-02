@@ -1,8 +1,8 @@
-// 1. Define your flashcards database
+// 1. Define your flashcards database (Added true Pinyin tones)
 const masterDeck = [
-    { id: 1, textToRead: "你好", pinyin: ["ni hao", "ni3 hao3"], english: ["hello", "hi"] },
-    { id: 2, textToRead: "谢谢", pinyin: ["xie xie", "xie4 xie"], english: ["thank you", "thanks"] },
-    { id: 3, textToRead: "再见", pinyin: ["zai jian", "zai4 jian4"], english: ["goodbye", "bye"] }
+    { id: 1, textToRead: "你好", pinyin: ["ni hao", "ni3 hao3", "nǐ hǎo"], english: ["hello", "hi"] },
+    { id: 2, textToRead: "谢谢", pinyin: ["xie xie", "xie4 xie", "xiè xiè", "xiè xie"], english: ["thank you", "thanks"] },
+    { id: 3, textToRead: "再见", pinyin: ["zai jian", "zai4 jian4", "zài jiàn"], english: ["goodbye", "bye"] }
 ];
 
 // 2. App State Variables
@@ -15,7 +15,6 @@ function shuffleArray(array) {
     }
 }
 
-// Shuffle immediately before starting
 shuffleArray(learningPile);
 let currentCard = null;
 
@@ -27,6 +26,7 @@ const englishInput = document.getElementById('english-input');
 const submitBtn = document.getElementById('submit-btn');
 const feedbackDiv = document.getElementById('feedback');
 const remainingCount = document.getElementById('remaining-count');
+const keys = document.querySelectorAll('.key'); // Selects all keyboard buttons
 
 // --- Text to Speech ---
 function speakText(text) {
@@ -35,6 +35,26 @@ function speakText(text) {
     utterance.rate = 0.8; 
     window.speechSynthesis.speak(utterance);
 }
+
+// --- On-Screen Keyboard Logic ---
+keys.forEach(key => {
+    key.addEventListener('click', (e) => {
+        const char = e.target.innerText;
+        
+        // Find exactly where the cursor currently is in the text box
+        const startPos = pinyinInput.selectionStart;
+        const endPos = pinyinInput.selectionEnd;
+        
+        // Insert the character exactly at the cursor
+        pinyinInput.value = pinyinInput.value.substring(0, startPos) 
+            + char 
+            + pinyinInput.value.substring(endPos, pinyinInput.value.length);
+        
+        // Move the cursor right after the newly inserted character
+        pinyinInput.focus();
+        pinyinInput.setSelectionRange(startPos + 1, startPos + 1);
+    });
+});
 
 // 4. Core Functions
 function loadNextCard() {
@@ -47,13 +67,11 @@ function loadNextCard() {
     
     currentCard = learningPile[0];
     
-    // Reset UI
     pinyinInput.value = "";
     englishInput.value = "";
     feedbackDiv.className = "feedback hidden";
     remainingCount.innerText = learningPile.length;
     
-    // Automatically put the cursor in the Pinyin box
     pinyinInput.focus(); 
 }
 
@@ -68,13 +86,10 @@ function checkAnswer() {
 
     if (isPinyinCorrect && isEnglishCorrect) {
         // --- CORRECT ANSWER ---
-        // Flash the background red
         document.body.classList.add('flash-red');
-        setTimeout(() => {
-            document.body.classList.remove('flash-red');
-        }, 300);
+        setTimeout(() => { document.body.classList.remove('flash-red'); }, 300);
 
-        audioCardInner.classList.add('is-flipped'); // Spin the card!
+        audioCardInner.classList.add('is-flipped'); 
         feedbackDiv.classList.add('hidden'); 
         learningPile.shift(); 
         
@@ -85,11 +100,8 @@ function checkAnswer() {
 
     } else {
         // --- INCORRECT ANSWER ---
-        // Flash the background dark green
         document.body.classList.add('flash-green');
-        setTimeout(() => {
-            document.body.classList.remove('flash-green');
-        }, 300); 
+        setTimeout(() => { document.body.classList.remove('flash-green'); }, 300); 
 
         feedbackDiv.innerText = "Incorrect. Try again!";
         feedbackDiv.style.color = "red";
@@ -98,22 +110,21 @@ function checkAnswer() {
         const wrongCard = learningPile.shift();
         learningPile.push(wrongCard);
         
-        // Wait 2 seconds, then load the next card
         setTimeout(loadNextCard, 2000);
     }
 }
 
 // 5. Event Listeners
 playBtn.addEventListener('click', () => {
-    if (currentCard) {
-        speakText(currentCard.textToRead);
-    }
+    if (currentCard) { speakText(currentCard.textToRead); }
 });
 
 englishInput.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        checkAnswer();
-    }
+    if (e.key === 'Enter') { checkAnswer(); }
+});
+
+pinyinInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') { checkAnswer(); }
 });
 
 submitBtn.addEventListener('click', checkAnswer);
