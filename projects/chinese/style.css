@@ -233,6 +233,8 @@ button:active {
 
 /* Prevent the keys from having the blue "submit button" styling */
 .pinyin-keyboard .key {
+    text-transform: none; /* This overrides the global button uppercase rule */
+    font-family: 'Montserrat', sans-serif; /* Ensuring they stay in Montserrat */
     background-color: #e9ecef;
     color: #333;
     font-weight: normal;
