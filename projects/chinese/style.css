@@ -23,18 +23,18 @@ body::before {
     transition: opacity 0.3s ease; 
 }
 
-/* CORRECT answers: Red glow in center fading to transparent edges */
+/* CORRECT answers */
 body.flash-red::before {
-    background: radial-gradient(circle at center, rgba(197, 5, 5, 0.6) 0%, rgba(255, 100, 100, 0) 70%);
+    background: radial-gradient(circle at center, rgba(255, 100, 100, 0.35) 0%, rgba(255, 100, 100, 0) 70%);
     opacity: 1;
-    transition: opacity 0.2s ease; 
+    transition: opacity 0.3s ease; /* Increased from 0.1s */
 }
 
-/* WRONG answers: Dark green vignette fading to transparent edges */
+/* WRONG answers */
 body.flash-green::before {
-    background: radial-gradient(circle at center, rgba(0, 100, 0, 0.5) 0%, rgba(0, 100, 0, 0) 70%);
+    background: radial-gradient(circle at center, rgba(0, 100, 0, 0.4) 0%, rgba(0, 100, 0, 0) 70%);
     opacity: 1;
-    transition: opacity 0.2s ease; 
+    transition: opacity 0.3s ease; /* Increased from 0.1s */
 }
 /* -------------------------------------- */
 

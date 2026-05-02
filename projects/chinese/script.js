@@ -84,7 +84,7 @@ function checkAnswer() {
     if (isPinyinCorrect && isEnglishCorrect) {
         // --- CORRECT ANSWER ---
         document.body.classList.add('flash-red');
-        setTimeout(() => { document.body.classList.remove('flash-red'); }, 300);
+        setTimeout(() => { document.body.classList.remove('flash-red'); }, 800);
 
         // Set the text and spin the card
         audioCardBack.innerText = "Correct!";
@@ -101,7 +101,7 @@ function checkAnswer() {
     } else {
         // --- INCORRECT ANSWER ---
         document.body.classList.add('flash-green');
-        setTimeout(() => { document.body.classList.remove('flash-green'); }, 300); 
+        setTimeout(() => { document.body.classList.remove('flash-green'); }, 800); 
 
         // Set the text to incorrect and spin the card!
         audioCardBack.innerText = "Incorrect!\nTry again.";
