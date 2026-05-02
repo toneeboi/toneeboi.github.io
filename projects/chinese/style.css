@@ -21,7 +21,7 @@ body::before {
     
     opacity: 0; 
     /* This controls the FADE OUT speed when the class is removed */
-    transition: opacity 3s ease-out; 
+    transition: opacity 2s ease-out; 
 }
 
 /* CORRECT answers */
