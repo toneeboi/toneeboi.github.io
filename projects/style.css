@@ -27,13 +27,19 @@ h1 {
 }
 
 .audio-section {
-    margin-bottom: 25px;
+    height: 160px; /* Matches the input section */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centers the button vertically */
+    margin-bottom: 20px;
 }
 
 /* Centers the labels and stacks the inputs */
 .input-section {
+    height: 160px; /* Matches the audio section */
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 10px;
     margin-bottom: 20px;
 }
