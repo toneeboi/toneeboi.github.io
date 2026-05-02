@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chinese Audio Flashcards</title>
-    <!-- The ?v=2 forces the browser to load the newest CSS -->
-    <link rel="stylesheet" href="style.css?v=2">
+    <!-- Bumped to v=3 just to make sure your browser doesn't cache the old one! -->
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
-    <div class="card-container">
+    <div class="app-wrapper">
+        <!-- 1. Header outside the cards -->
         <h1>Audio Flashcards</h1>
         
-        <div class="audio-section">
+        <!-- 2. First separate card for Audio -->
+        <div class="card">
             <button id="play-btn">🔊 Hear Word</button>
         </div>
 
-        <div class="input-section">
+        <!-- 3. Second separate card for Inputs -->
+        <div class="card input-card">
             <label for="pinyin-input">Pinyin:</label>
             <input type="text" id="pinyin-input" placeholder="e.g. ni hao or ni3 hao3">
             
@@ -23,10 +26,12 @@
             <input type="text" id="english-input" placeholder="e.g. hello">
         </div>
 
+        <!-- 4. Submit Button outside the cards -->
         <button id="submit-btn">Submit</button>
 
         <div id="feedback" class="feedback hidden"></div>
         
+        <!-- 5. Cards Remaining at the very bottom -->
         <div class="stats">
             <p>Cards Remaining: <span id="remaining-count">0</span></p>
         </div>
