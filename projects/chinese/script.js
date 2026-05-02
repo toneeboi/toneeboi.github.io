@@ -2,7 +2,8 @@
 let masterDeck = []; 
 let learningPile = [];
 let currentCard = null;
-let preferredVoice = null; // Store the Google voice here
+let preferredVoice = null;
+let isShowingAnswer = false; // New flag to track if we are in "Next" mode
 
 // 2. UI Elements
 const audioCardInner = document.getElementById('audio-card-inner'); 
@@ -15,39 +16,28 @@ const displayEnglish = document.getElementById('display-english');
 const playBtn = document.getElementById('play-btn');
 const pinyinInput = document.getElementById('pinyin-input');
 const englishInput = document.getElementById('english-input');
-const submitBtn = document.getElementById('submit-btn');
+const submitBtn = document.getElementById('submit-btn'); // This will toggle text
 const feedbackDiv = document.getElementById('feedback');
 const remainingCount = document.getElementById('remaining-count');
 const keys = document.querySelectorAll('.key'); 
 
 // --- Speech Synthesis Setup ---
 
-/**
- * Finds and caches the Google Mandarin voice.
- * This runs when voices change or at startup.
- */
 function setVoice() {
     const voices = window.speechSynthesis.getVoices();
-    // Prioritize the Google-branded Chinese voice for Translate-like quality
     preferredVoice = voices.find(voice => 
         voice.lang === 'zh-CN' && voice.name.includes('Google')
-    ) || voices.find(voice => voice.lang === 'zh-CN'); // Fallback to any zh-CN voice
+    ) || voices.find(voice => voice.lang === 'zh-CN');
 }
 
-// Attach the listener
 window.speechSynthesis.onvoiceschanged = setVoice;
-// Initial call for browsers where voices might already be loaded
 setVoice();
 
 function speakText(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'zh-CN'; 
     utterance.rate = 0.4; 
-    
-    if (preferredVoice) {
-        utterance.voice = preferredVoice;
-    }
-    
+    if (preferredVoice) utterance.voice = preferredVoice;
     window.speechSynthesis.speak(utterance);
 }
 
@@ -65,7 +55,7 @@ function shuffleArray(array) {
     }
 }
 
-// --- CSV Loading & Game Initialization ---
+// --- CSV Loading ---
 
 async function loadDeckFromCSV() {
     try {
@@ -76,7 +66,6 @@ async function loadDeckFromCSV() {
         masterDeck = rows.map(row => {
             const columns = row.split(',');
             if (columns.length < 4) return null;
-
             return {
                 id: columns[0].trim(),
                 textToRead: columns[1].trim(),
@@ -88,8 +77,6 @@ async function loadDeckFromCSV() {
         initGame();
     } catch (error) {
         console.error("Error loading CSV:", error);
-        feedbackDiv.innerText = "Error loading vocabulary deck.";
-        feedbackDiv.classList.remove('hidden');
     }
 }
 
@@ -106,6 +93,7 @@ function loadNextCard() {
         feedbackDiv.innerText = "Congratulations! You finished the deck!";
         feedbackDiv.style.color = "green";
         feedbackDiv.classList.remove('hidden');
+        submitBtn.style.display = 'none'; // Hide button when finished
         return;
     }
     
@@ -114,11 +102,16 @@ function loadNextCard() {
     englishInput.value = "";
     feedbackDiv.className = "feedback hidden";
     remainingCount.innerText = learningPile.length;
+    
+    // Reset Button State
+    submitBtn.innerText = "Submit";
+    isShowingAnswer = false;
+    
     pinyinInput.focus(); 
 }
 
 function checkAnswer() {
-    if (!currentCard) return;
+    if (!currentCard || isShowingAnswer) return;
 
     const userPinyin = cleanString(pinyinInput.value);
     const userEnglish = cleanString(englishInput.value);
@@ -126,6 +119,7 @@ function checkAnswer() {
     const isPinyinCorrect = currentCard.pinyin.map(ans => cleanString(ans)).includes(userPinyin);
     const isEnglishCorrect = currentCard.english.map(ans => cleanString(ans)).includes(userEnglish);
 
+    // Update back faces
     displayChars.innerText = currentCard.textToRead;
     displayPinyin.innerText = currentCard.pinyin[0]; 
     displayEnglish.innerText = currentCard.english[0];
@@ -141,36 +135,62 @@ function checkAnswer() {
         setTimeout(() => { document.body.classList.remove('flash-green'); }, 2000); 
         audioCardBack.innerText = "Incorrect!";
         audioCardBack.style.color = "darkgreen";
+        // Re-queue
         const wrongCard = learningPile.shift();
         learningPile.push(wrongCard);
     }
 
+    // Flip Cards & Change Button
     audioCardInner.classList.add('is-flipped');
     inputCardInner.classList.add('is-flipped');
+    submitBtn.innerText = "Next";
+    isShowingAnswer = true;
+}
 
-    setTimeout(() => {
-        audioCardInner.classList.remove('is-flipped');
-        inputCardInner.classList.remove('is-flipped');
-        setTimeout(loadNextCard, 400); 
-    }, 2000);
+/**
+ * Handles the manual transition to the next card
+ */
+function handleNext() {
+    // Flip cards back first
+    audioCardInner.classList.remove('is-flipped');
+    inputCardInner.classList.remove('is-flipped');
+
+    // Wait for flip animation to finish before loading data
+    setTimeout(loadNextCard, 400);
 }
 
 // --- Event Listeners ---
 
+submitBtn.addEventListener('click', () => {
+    if (isShowingAnswer) {
+        handleNext();
+    } else {
+        checkAnswer();
+    }
+});
+
+// Allow 'Enter' key to handle both Submit and Next
+window.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        if (isShowingAnswer) {
+            handleNext();
+        } else {
+            checkAnswer();
+        }
+    }
+});
+
 keys.forEach(key => {
     key.addEventListener('click', (e) => {
+        if (isShowingAnswer) return; // Disable keyboard when showing answer
         const char = e.target.innerText;
         const startPos = pinyinInput.selectionStart;
-        const endPos = pinyinInput.selectionEnd;
-        pinyinInput.value = pinyinInput.value.substring(0, startPos) + char + pinyinInput.value.substring(endPos);
+        pinyinInput.value = pinyinInput.value.substring(0, startPos) + char + pinyinInput.value.substring(startPos);
         pinyinInput.focus();
         pinyinInput.setSelectionRange(startPos + 1, startPos + 1);
     });
 });
 
 playBtn.addEventListener('click', () => { if (currentCard) speakText(currentCard.textToRead); });
-englishInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkAnswer(); });
-pinyinInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkAnswer(); });
-submitBtn.addEventListener('click', checkAnswer);
 
 loadDeckFromCSV();
