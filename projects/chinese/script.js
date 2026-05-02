@@ -3,6 +3,12 @@ let masterDeck = []; // Now starts empty
 let learningPile = [];
 let currentCard = null;
 
+// Helper to strip punctuation and normalize strings
+function cleanString(str) {
+    // This regex looks for ' ? , ! and replaces them with an empty string
+    return str.toLowerCase().replace(/[',?!]/g, "").trim();
+}
+
 // 2. UI Elements
 const audioCardInner = document.getElementById('audio-card-inner'); 
 const audioCardBack = document.getElementById('audio-card-back');
@@ -102,13 +108,21 @@ function loadNextCard() {
 function checkAnswer() {
     if (!currentCard) return;
 
-    const userPinyin = pinyinInput.value.toLowerCase().trim();
-    const userEnglish = englishInput.value.toLowerCase().trim();
+    // 1. Clean the user's input
+    const userPinyin = cleanString(pinyinInput.value);
+    const userEnglish = cleanString(englishInput.value);
 
-    const isPinyinCorrect = currentCard.pinyin.map(ans => ans.toLowerCase().trim()).includes(userPinyin);
-    const isEnglishCorrect = currentCard.english.map(ans => ans.toLowerCase().trim()).includes(userEnglish);
+    // 2. Clean the deck answers before comparing
+    const isPinyinCorrect = currentCard.pinyin
+        .map(ans => cleanString(ans))
+        .includes(userPinyin);
+
+    const isEnglishCorrect = currentCard.english
+        .map(ans => cleanString(ans))
+        .includes(userEnglish);
 
     if (isPinyinCorrect && isEnglishCorrect) {
+        // --- CORRECT ANSWER ---
         document.body.classList.add('flash-red');
         setTimeout(() => { document.body.classList.remove('flash-red'); }, 1000);
 
@@ -124,6 +138,7 @@ function checkAnswer() {
         }, 4000);
 
     } else {
+        // --- INCORRECT ANSWER ---
         document.body.classList.add('flash-green');
         setTimeout(() => { document.body.classList.remove('flash-green'); }, 1000); 
 
