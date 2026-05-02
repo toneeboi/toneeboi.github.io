@@ -1,29 +1,13 @@
 // 1. Define your flashcards database
 const masterDeck = [
-    {
-        id: 1,
-        textToRead: "你好", 
-        pinyin: ["ni hao", "ni3 hao3"], 
-        english: ["hello", "hi"]
-    },
-    {
-        id: 2,
-        textToRead: "谢谢",
-        pinyin: ["xie xie", "xie4 xie"],
-        english: ["thank you", "thanks"]
-    },
-    {
-        id: 3,
-        textToRead: "再见",
-        pinyin: ["zai jian", "zai4 jian4"],
-        english: ["goodbye", "bye"]
-    }
+    { id: 1, textToRead: "你好", pinyin: ["ni hao", "ni3 hao3"], english: ["hello", "hi"] },
+    { id: 2, textToRead: "谢谢", pinyin: ["xie xie", "xie4 xie"], english: ["thank you", "thanks"] },
+    { id: 3, textToRead: "再见", pinyin: ["zai jian", "zai4 jian4"], english: ["goodbye", "bye"] }
 ];
 
 // 2. App State Variables
 let learningPile = [...masterDeck]; 
 
-// --- Randomize the deck ---
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -37,6 +21,7 @@ shuffleArray(learningPile);
 let currentCard = null;
 
 // 3. UI Elements
+const audioCardInner = document.getElementById('audio-card-inner'); // The new flipping card
 const playBtn = document.getElementById('play-btn');
 const pinyinInput = document.getElementById('pinyin-input');
 const englishInput = document.getElementById('english-input');
@@ -63,8 +48,6 @@ function loadNextCard() {
     
     currentCard = learningPile[0];
     
-    // *** REMOVED THE AUTO-SPEAK LINE HERE ***
-    
     // Reset UI
     pinyinInput.value = "";
     englishInput.value = "";
@@ -85,26 +68,42 @@ function checkAnswer() {
     const isEnglishCorrect = currentCard.english.includes(userEnglish);
 
     if (isPinyinCorrect && isEnglishCorrect) {
-        feedbackDiv.innerText = "Correct!";
-        feedbackDiv.style.color = "green";
+        // --- CORRECT ANSWER ---
+        audioCardInner.classList.add('is-flipped'); // Spins the card!
+        feedbackDiv.classList.add('hidden'); // Hide any text feedback
         learningPile.shift(); 
+        
+        // Wait 2 seconds, flip back, then load next card
+        setTimeout(() => {
+            audioCardInner.classList.remove('is-flipped');
+            // Wait an extra 400ms for the flip animation to finish before updating inputs
+            setTimeout(loadNextCard, 400); 
+        }, 2000);
+
     } else {
-        feedbackDiv.innerText = `Incorrect. Pinyin: ${currentCard.pinyin[0]} | English: ${currentCard.english[0]}`;
+        // --- INCORRECT ANSWER ---
+        // Flash the background red
+        document.body.classList.add('flash-red');
+        setTimeout(() => {
+            document.body.classList.remove('flash-red');
+        }, 300); // Removes the red background after a quick flash
+
+        // Give a generic incorrect message instead of showing the answer
+        feedbackDiv.innerText = "Incorrect. Try again!";
         feedbackDiv.style.color = "red";
+        feedbackDiv.classList.remove('hidden');
+
         const wrongCard = learningPile.shift();
         learningPile.push(wrongCard);
+        
+        // Wait 2 seconds, then load the next card
+        setTimeout(loadNextCard, 2000);
     }
-    
-    feedbackDiv.classList.remove('hidden');
-    
-    // Wait 2 seconds, then load the next card
-    setTimeout(loadNextCard, 2000);
 }
 
 // 5. Event Listeners
 playBtn.addEventListener('click', () => {
     if (currentCard) {
-        // Now, this is the ONLY way the audio plays!
         speakText(currentCard.textToRead);
     }
 });
