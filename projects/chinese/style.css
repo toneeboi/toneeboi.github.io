@@ -1,0 +1,179 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f5f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* --- THE VIGNETTE FLASH OVERLAY --- */
+body::before {
+    content: "";
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; 
+    pointer-events: none; 
+    
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
+}
+
+/* CORRECT answers: Red glow in center fading to transparent edges */
+body.flash-red::before {
+    background: radial-gradient(circle at center, rgba(255, 100, 100, 0.35) 0%, rgba(255, 100, 100, 0) 70%);
+    opacity: 1;
+    transition: opacity 0.1s ease; 
+}
+
+/* WRONG answers: Dark green vignette fading to transparent edges */
+body.flash-green::before {
+    background: radial-gradient(circle at center, rgba(0, 100, 0, 0.4) 0%, rgba(0, 100, 0, 0) 70%);
+    opacity: 1;
+    transition: opacity 0.1s ease; 
+}
+/* -------------------------------------- */
+
+.app-wrapper {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    margin: 0 0 10px 0;
+    color: #000;
+}
+
+/* --- 3D FLIP CARD STYLES --- */
+.audio-card-container {
+    perspective: 1000px; 
+    width: 100%;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+}
+
+.card-inner.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-sizing: border-box;
+}
+
+.card-front {
+    padding: 25px;
+    text-align: center;
+}
+
+.card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotateY(180deg); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    color: darkred;
+    font-size: 24px;
+    font-weight: bold;
+}
+/* ------------------------------ */
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.input-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+}
+
+.input-card label {
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+    border: 2px solid #000;
+}
+
+button {
+    padding: 14px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#submit-btn {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.feedback {
+    text-align: center;
+    font-weight: bold;
+    min-height: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.stats {
+    text-align: right;
+    color: #555;
+    font-size: 14px;
+}
+
+.stats p {
+    margin: 0;
+}
