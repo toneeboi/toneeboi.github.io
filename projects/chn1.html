@@ -7,25 +7,35 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Audio Flashcards</h1>
+    <div class="app-wrapper">
+        <!-- Header -->
+        <h1 class="main-header">Audio Flashcards</h1>
         
-        <div class="card-area">
+        <!-- Card 1: Hear Word Button -->
+        <div class="card audio-card">
             <button id="play-btn">🔊 Hear Word</button>
         </div>
 
-        <div class="input-area">
-            <label for="pinyin-input">Pinyin:</label>
-            <input type="text" id="pinyin-input" placeholder="e.g. ni hao or ni3 hao3">
+        <!-- Card 2: Answer Section -->
+        <div class="card input-card">
+            <div class="input-group">
+                <label for="pinyin-input">Pinyin:</label>
+                <input type="text" id="pinyin-input" placeholder="e.g. ni hao or ni3 hao3">
+            </div>
             
-            <label for="english-input">English:</label>
-            <input type="text" id="english-input" placeholder="e.g. hello">
-            
-            <button id="submit-btn">Submit</button>
+            <div class="input-group">
+                <label for="english-input">English:</label>
+                <input type="text" id="english-input" placeholder="e.g. hello">
+            </div>
         </div>
 
+        <!-- Submit Button -->
+        <button id="submit-btn">Submit</button>
+
+        <!-- Feedback Area -->
         <div id="feedback" class="feedback hidden"></div>
         
+        <!-- Cards Remaining (Lower Right) -->
         <div class="stats">
             <p>Cards Remaining: <span id="remaining-count">0</span></p>
         </div>
