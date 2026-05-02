@@ -127,16 +127,20 @@ h1 {
 
 input {
     padding: 12px;
-    border: 1px solid #ccc;
+    border: 1px solid #ccc; /* Standard 1px border */
     border-radius: 6px;
     font-size: 16px;
     width: 100%;
     box-sizing: border-box;
+    /* This makes the "thickening" look smooth rather than a sudden snap */
+    transition: border-color 0.2s, box-shadow 0.2s; 
 }
 
 input:focus {
     outline: none;
-    border: 2px solid #000;
+    border-color: #000; /* Darken the actual border */
+    /* Adds a 1px "ring" outside the border that doesn't affect layout size */
+    box-shadow: 0 0 0 1px #000; 
 }
 
 button {
