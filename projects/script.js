@@ -72,6 +72,12 @@ function checkAnswer() {
         audioCardInner.classList.add('is-flipped'); // Spins the card!
         feedbackDiv.classList.add('hidden'); // Hide any text feedback
         learningPile.shift(); 
+
+        // Flash the background red
+        document.body.classList.add('flash-red');
+        setTimeout(() => {
+            document.body.classList.remove('flash-red');
+        }, 300); // Removes the red background after a quick flash
         
         // Wait 2 seconds, flip back, then load next card
         setTimeout(() => {
@@ -83,9 +89,9 @@ function checkAnswer() {
     } else {
         // --- INCORRECT ANSWER ---
         // Flash the background red
-        document.body.classList.add('flash-red');
+        document.body.classList.add('flash-green');
         setTimeout(() => {
-            document.body.classList.remove('flash-red');
+            document.body.classList.remove('flash-green');
         }, 300); // Removes the red background after a quick flash
 
         // Give a generic incorrect message instead of showing the answer
