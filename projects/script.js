@@ -21,13 +21,12 @@ const masterDeck = [
 ];
 
 // 2. App State Variables
-let learningPile = [...masterDeck]; // Start with all cards here
+let learningPile = [...masterDeck]; 
 
-// --- NEW FUNCTION: Randomize the deck ---
+// --- Randomize the deck ---
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        // Swap the elements
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
@@ -45,18 +44,11 @@ const submitBtn = document.getElementById('submit-btn');
 const feedbackDiv = document.getElementById('feedback');
 const remainingCount = document.getElementById('remaining-count');
 
-// --- NEW FUNCTION: Text to Speech ---
+// --- Text to Speech ---
 function speakText(text) {
-    // Create a new speech request
     const utterance = new SpeechSynthesisUtterance(text);
-    
-    // Force the language to Mandarin Chinese
     utterance.lang = 'zh-CN'; 
-    
-    // Optional: Slow down the speech rate slightly for learning (0.8 is good, 1.0 is normal speed)
     utterance.rate = 0.8; 
-    
-    // Tell the browser to speak
     window.speechSynthesis.speak(utterance);
 }
 
@@ -69,11 +61,9 @@ function loadNextCard() {
         return;
     }
     
-    // Pick the first card in the pile
     currentCard = learningPile[0];
     
-    // Automatically speak the word when the card loads
-    speakText(currentCard.textToRead);
+    // *** REMOVED THE AUTO-SPEAK LINE HERE ***
     
     // Reset UI
     pinyinInput.value = "";
@@ -81,30 +71,26 @@ function loadNextCard() {
     feedbackDiv.className = "feedback hidden";
     remainingCount.innerText = learningPile.length;
     
-    // Automatically put the cursor in the Pinyin box so you can start typing immediately
+    // Automatically put the cursor in the Pinyin box
     pinyinInput.focus(); 
 }
 
 function checkAnswer() {
     if (!currentCard) return;
 
-    // Clean inputs: convert to lowercase and remove extra spaces
     const userPinyin = pinyinInput.value.toLowerCase().trim();
     const userEnglish = englishInput.value.toLowerCase().trim();
 
-    // Check if the user's input exists in our array of accepted answers
     const isPinyinCorrect = currentCard.pinyin.includes(userPinyin);
     const isEnglishCorrect = currentCard.english.includes(userEnglish);
 
     if (isPinyinCorrect && isEnglishCorrect) {
         feedbackDiv.innerText = "Correct!";
         feedbackDiv.style.color = "green";
-        // Remove from learning pile (moves to "correct" pile implicitly by deletion)
         learningPile.shift(); 
     } else {
         feedbackDiv.innerText = `Incorrect. Pinyin: ${currentCard.pinyin[0]} | English: ${currentCard.english[0]}`;
         feedbackDiv.style.color = "red";
-        // Move the current card to the back of the pile rotation
         const wrongCard = learningPile.shift();
         learningPile.push(wrongCard);
     }
@@ -118,12 +104,11 @@ function checkAnswer() {
 // 5. Event Listeners
 playBtn.addEventListener('click', () => {
     if (currentCard) {
-        // Speak the characters again if the user clicks the button
+        // Now, this is the ONLY way the audio plays!
         speakText(currentCard.textToRead);
     }
 });
 
-// Allow hitting "Enter" in the English input to submit
 englishInput.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
         checkAnswer();
