@@ -1,3 +1,6 @@
+/* 1. Import the Google Font at the top of the file */
+@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap');
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f5f7;
@@ -226,6 +229,9 @@ button:hover {
     padding: 20px;
     background: #fff;
     color: #333;
+    display: flex; /* Ensure it stays a flex container */
+    justify-content: center;
+    align-items: center;
 }
 
 .meaning-display h2 {
@@ -237,6 +243,15 @@ button:hover {
 .meaning-display p {
     margin: 5px 0;
     font-size: 18px;
+}
+
+#display-chars {
+    /* Apply the Ma Shan Zheng font here */
+    font-family: 'Ma Shan Zheng', cursive; 
+    font-size: 64px; /* Increased size slightly to show off the calligraphy */
+    margin: 0;
+    color: #000;
+    font-weight: normal; /* This font doesn't need bolding */
 }
 
 #display-pinyin {
