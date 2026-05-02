@@ -15,13 +15,11 @@ function shuffleArray(array) {
     }
 }
 
-// Shuffle the learning pile immediately before starting
 shuffleArray(learningPile);
-
 let currentCard = null;
 
 // 3. UI Elements
-const audioCardInner = document.getElementById('audio-card-inner'); // The new flipping card
+const audioCardInner = document.getElementById('audio-card-inner'); 
 const playBtn = document.getElementById('play-btn');
 const pinyinInput = document.getElementById('pinyin-input');
 const englishInput = document.getElementById('english-input');
@@ -69,32 +67,29 @@ function checkAnswer() {
 
     if (isPinyinCorrect && isEnglishCorrect) {
         // --- CORRECT ANSWER ---
-        audioCardInner.classList.add('is-flipped'); // Spins the card!
-        feedbackDiv.classList.add('hidden'); // Hide any text feedback
-        learningPile.shift(); 
-
         // Flash the background red
         document.body.classList.add('flash-red');
         setTimeout(() => {
             document.body.classList.remove('flash-red');
-        }, 300); // Removes the red background after a quick flash
+        }, 300);
+
+        audioCardInner.classList.add('is-flipped'); // Spins the card
+        feedbackDiv.classList.add('hidden'); 
+        learningPile.shift(); 
         
-        // Wait 2 seconds, flip back, then load next card
         setTimeout(() => {
             audioCardInner.classList.remove('is-flipped');
-            // Wait an extra 400ms for the flip animation to finish before updating inputs
             setTimeout(loadNextCard, 400); 
         }, 2000);
 
     } else {
         // --- INCORRECT ANSWER ---
-        // Flash the background red
-        document.body.classList.add('flash-green');
+        // Flash the background gray
+        document.body.classList.add('flash-gray');
         setTimeout(() => {
-            document.body.classList.remove('flash-green');
-        }, 300); // Removes the red background after a quick flash
+            document.body.classList.remove('flash-gray');
+        }, 300); 
 
-        // Give a generic incorrect message instead of showing the answer
         feedbackDiv.innerText = "Incorrect. Try again!";
         feedbackDiv.style.color = "red";
         feedbackDiv.classList.remove('hidden');
