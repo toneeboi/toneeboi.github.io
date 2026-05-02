@@ -22,17 +22,15 @@ const keys = document.querySelectorAll('.key');
 // --- Helper Functions ---
 
 /**
- * Normalizes strings by removing specified punctuation and lowercasing
- * to ensure robust answer matching.
+ * Normalizes strings. Specifically excludes parentheses from removal 
+ * to support notes like "(polite)" or "(formal)".
  */
 function cleanString(str) {
     if (!str) return "";
+    // Removes standard punctuation but PRESERVES ( )
     return str.toLowerCase().replace(/[',?!]/g, "").trim();
 }
 
-/**
- * Shuffles the deck using the Fisher-Yates algorithm for random order.
- */
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -46,8 +44,6 @@ async function loadDeckFromCSV() {
     try {
         const response = await fetch('deck.csv');
         const data = await response.text();
-        
-        // Split by line and skip header row
         const rows = data.split('\n').slice(1);
         
         masterDeck = rows.map(row => {
@@ -57,7 +53,6 @@ async function loadDeckFromCSV() {
             return {
                 id: columns[0].trim(),
                 textToRead: columns[1].trim(),
-                // Semicolons used in CSV to allow multiple correct answers
                 pinyin: columns[2].trim().split(';'),
                 english: columns[3].trim().split(';')
             };
@@ -82,7 +77,6 @@ function initGame() {
 function loadNextCard() {
     if (learningPile.length === 0) {
         feedbackDiv.innerText = "Congratulations! You finished the deck!";
-        feedbackDiv.className = "feedback";
         feedbackDiv.style.color = "green";
         feedbackDiv.classList.remove('hidden');
         return;
@@ -96,13 +90,10 @@ function loadNextCard() {
     pinyinInput.focus(); 
 }
 
-/**
- * Pronunciation logic with slow speech rate for clear tone distinction.
- */
 function speakText(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'zh-CN'; 
-    utterance.rate = 0.4; 
+    utterance.rate = 0.4; // Preserved slow rate for clear tones
     window.speechSynthesis.speak(utterance);
 }
 
@@ -115,38 +106,31 @@ function checkAnswer() {
     const isPinyinCorrect = currentCard.pinyin.map(ans => cleanString(ans)).includes(userPinyin);
     const isEnglishCorrect = currentCard.english.map(ans => cleanString(ans)).includes(userEnglish);
 
-    // Populate display for the input card's back face
+    // Update the back of the input card (Ma Shan Zheng font used in CSS)
     displayChars.innerText = currentCard.textToRead;
     displayPinyin.innerText = currentCard.pinyin[0]; 
     displayEnglish.innerText = currentCard.english[0];
 
     if (isPinyinCorrect && isEnglishCorrect) {
-        // --- CORRECT ANSWER ---
         document.body.classList.add('flash-red');
         setTimeout(() => { document.body.classList.remove('flash-red'); }, 2000);
-
         audioCardBack.innerText = "Correct!";
         audioCardBack.style.color = "darkred";
-        
         learningPile.shift(); 
     } else {
-        // --- INCORRECT ANSWER ---
         document.body.classList.add('flash-green');
         setTimeout(() => { document.body.classList.remove('flash-green'); }, 2000); 
-
         audioCardBack.innerText = "Incorrect!";
         audioCardBack.style.color = "darkgreen";
-
-        // Re-queue the card for later review
         const wrongCard = learningPile.shift();
         learningPile.push(wrongCard);
     }
 
-    // Synchronized flip for both cards
+    // Synchronized flip
     audioCardInner.classList.add('is-flipped');
     inputCardInner.classList.add('is-flipped');
 
-    // Wait exactly 2 seconds before resetting for the next card
+    // Wait exactly 2 seconds before resetting
     setTimeout(() => {
         audioCardInner.classList.remove('is-flipped');
         inputCardInner.classList.remove('is-flipped');
@@ -161,23 +145,15 @@ keys.forEach(key => {
         const char = e.target.innerText;
         const startPos = pinyinInput.selectionStart;
         const endPos = pinyinInput.selectionEnd;
-        
-        pinyinInput.value = pinyinInput.value.substring(0, startPos) 
-            + char 
-            + pinyinInput.value.substring(endPos, pinyinInput.value.length);
-        
+        pinyinInput.value = pinyinInput.value.substring(0, startPos) + char + pinyinInput.value.substring(endPos);
         pinyinInput.focus();
         pinyinInput.setSelectionRange(startPos + 1, startPos + 1);
     });
 });
 
-playBtn.addEventListener('click', () => {
-    if (currentCard) { speakText(currentCard.textToRead); }
-});
-
+playBtn.addEventListener('click', () => { if (currentCard) speakText(currentCard.textToRead); });
 englishInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkAnswer(); });
 pinyinInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkAnswer(); });
 submitBtn.addEventListener('click', checkAnswer);
 
-// Start the fetch process
 loadDeckFromCSV();
