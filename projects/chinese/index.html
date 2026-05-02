@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Audio Flashcards</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- Header -->
+        <h1>Audio Flashcards</h1>
+        
+        <!-- 3D Flip Card for Audio -->
+        <div class="audio-card-container">
+            <div class="card-inner" id="audio-card-inner">
+                
+                <!-- Front of the Card -->
+                <div class="card-front">
+                    <button id="play-btn">🔊 Hear Word</button>
+                </div>
+                
+                <!-- Back of the Card -->
+                <div class="card-back">
+                    Correct!
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Input Card -->
+        <div class="card input-card">
+            <label for="pinyin-input">Pinyin:</label>
+            <input type="text" id="pinyin-input" placeholder="e.g. ni hao or ni3 hao3">
+            
+            <label for="english-input">English:</label>
+            <input type="text" id="english-input" placeholder="e.g. hello">
+        </div>
+
+        <!-- Submit Button -->
+        <button id="submit-btn">Submit</button>
+
+        <div id="feedback" class="feedback hidden"></div>
+        
+        <!-- Stats -->
+        <div class="stats">
+            <p>Cards Remaining: <span id="remaining-count">0</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
