@@ -10,50 +10,92 @@ id,textToRead,pinyin,english
 9,你好,nǐhǎo;nǐ hǎo,hello;hi
 10,你叫什么名字,nǐ jiào shénme míngzi;nǐ jiào shén me míng zi,what's your name?;what is your name?
 11,他叫什么名字,tā jiào shénme míngzi;tā jiào shén me míng zi,what's his name?;what is his name?
-12,这,;zhè,this
+12,这,zhè;zhè,this
 13,是,shì;shì,to be
 14,中国人,zhōngguó rén;zhōng guó rén,chinese;chinese person
 15,中国,zhōngguó;zhōng guó,china
-16,您,nín;nín,you;you (polite)
-17,认识,rènshi;rèn shi,to know
-18,很,hěn;hěn,very;quite
-19,高兴,gāoxìng;gāo xìng,happy;glad
-20,也,yě;yě,also;too
-21,那,nà;nà,that
-22,谁,shéi;shéi,who;whom
-23,哪国人,nǎ guórén;nǎ guó rén,person from which country;what nationality
-24,哪,nǎ;nǎ,which
-25,您好,nínhǎo;nín hǎo,hello;hi;hello (polite);hi (polite)
-26,认识您很高兴,rènshi nín hěn gāoxìng;rèn shi nín hěn gāo xìng,glad to meet you;i'm glad to meet you
-27,认识您我也很高兴,rènshi nín wǒ yě hěn gāoxìng;rèn shi nín wǒ yě hěn gāo xìng,"i'm glad to meet you, too"
-28,那是谁,nà shì shéi;nà shì shéi,who's that?;who is that?
-29,他是哪国人,tā shì nǎ guórén;tā shì nǎ guó rén,what's his nationality?;what is his nationality?
-30,老师,lǎoshī;lǎo shī,teacher
-31,学生,xuésheng;xué sheng,student
-32,同学,tóngxué;tóng xué,classmate
-33,同学们,tóngxué men;tóng xué men,classmates
-34,我的,wǒ de;wǒ de,mine
-35,我不知道,wǒ bù zhīdào;wǒ bù zhī dào,i don't know;i do not know
-36,谁认识他,shéi rènshi tā;shéi rèn shi tā,who know him?
-37,准备好了,zhǔnbèi hǎo le;zhǔn bèi hǎo le,prepared;ready
-38,喜欢,xǐhuan;xǐ huan,to like
-39,菲律宾,fēilǜbīn;fēi lǜ bīn,Philippines
-40,手机,shǒujī;shǒu jī,cellphone
-41,邮递员,yóudìyuán;yóu dì yuán,mailman;postman;courier
-42,请问,qǐngwèn;qǐng wèn,Excuse me;may i ask
-43,先生,xiānsheng;xiān sheng,mr;mister;sir
-44,吗,ma;ma,question
-45,不,bù;bù,no;not
-46,这是我的快递,zhè shì wǒ de kuàidì;zhè shì wǒ de kuài dì,this is my mail;this is my parcel
-47,快递,kuàidì;kuài dì,express mail;mail;parcel
-48,对不起,duìbuqǐ;duì bu qǐ,to be sorry;i'm sorry
-49,没关系,méiguānxi;méi guān xi,It doesn't matter;It's alright
-50,再见,zàijiàn;zài jiàn,to see you around;see you around;good bye
-51,小姐,xiǎojie;xiǎo jie,young lady;miss;ms
-52,女士,nǚshì;nǚ shì,lady;madam
-53,经理,jīnglǐ;jīng lǐ,manager
-54,大夫,dàfū;dà fū,doctor
-55,不是,bùshì;bù shì,no
-56,他是大卫,tā shì dàwèi;tā shì dà wèi,He is David
-57,他是法国人,tā shì fǎguórén;tā shì fǎ guó rén,He is French
-58,他是孔子,tā shì kǒngzǐ;tā shì kǒng zǐ,He is Confucius
+16,人,rén;rén,people;person
+17,您,nín;nín,you;you (polite)
+18,认识,rènshi;rèn shi,to know
+19,很,hěn;hěn,very;quite
+20,高兴,gāoxìng;gāo xìng,happy;glad
+21,也,yě;yě,also;too
+22,那,nà;nà,that
+23,谁,shéi;shéi,who;whom
+24,哪国人,nǎ guórén;nǎ guó rén,person from which country;what nationality;which country
+25,哪,nǎ;nǎ,which
+26,他是哪国人,tā shì nǎ guórén;tā shì nǎ guó rén,what's his nationality?;what is his nationality?
+27,德国人,déguórén;dé guó rén,German
+28,德国,déguó;dé guó,Germany
+29,西班牙人,xībānyárén;xī bān yá rén,Spanish
+30,南非人,nánfēi rén;nán fēi rén,South African
+31,南非,nánfēi;nán fēi,South Africa
+32,美国人,měiguó rén;měi guó rén,American
+33,美国,měiguó;měi guó,USA；United States of America
+34,他是中国人,tā shì zhōngguó rén;tā shì zhōng guó rén,He is Chinese
+35,他是大卫,tā shì dàwèi;tā shì dà wèi,He is David
+36,他是法国人,tā shì fǎguórén;tā shì fǎ guó rén,He is French
+37,他是孔子,tā shì kǒngzǐ;tā shì kǒng zǐ,He is Confucius
+38,他是德国人,tā shì déguórén;tā shì dé guó rén,He is German
+39,他是西班牙人,tā shì xībānyárén;tā shì xī bān yá rén,He is Spanish
+40,他是南非人,tā shì nánfēi rén;tā shì nán fēi rén,He is a South African
+41,他是美国人,tā shì měiguó rén;tā shì měi guó rén,He is an American.
+42,认识您很高兴,rènshi nín hěn gāoxìng;rèn shi nín hěn gāo xìng,glad to meet you;i'm glad to meet you
+43,认识您我也很高兴,rènshi nín wǒ yě hěn gāoxìng;rèn shi nín wǒ yě hěn gāo xìng,"i'm glad to meet you, too"
+44,您好,nínhǎo;nín hǎo,hello;hi;hello (polite);hi (polite)
+45,那是谁,nà shì shéi;nà shì shéi,who's that?;who is that?
+46,老师,lǎoshī;lǎo shī,teacher
+47,学生,xuésheng;xué sheng,student
+48,同学,tóngxué;tóng xué,classmate
+49,同学们,tóngxué men;tóng xué men,classmates
+50,我的,wǒ de;wǒ de,mine
+51,我不知道,wǒ bù zhīdào;wǒ bù zhī dào,i don't know;i do not know
+52,谁认识他,shéi rènshi tā;shéi rèn shi tā,who knows him?
+53,菲律宾,fēilǜbīn;fēi lǜ bīn,Philippines
+54,您是木先生吗,nín shì mù xiānsheng ma;nín shì mù xiān sheng ma,Are you Mr. Mu?
+55,邮递员,yóudìyuán;yóu dì yuán,mailman;postman;courier
+56,请问,qǐngwèn;qǐng wèn,Excuse me;may i ask
+57,先生,xiānsheng;xiān sheng,mr;mister;sir
+58,吗,ma;ma,question
+59,不,bù;bù,no;not
+60,这是我的快递,zhè shì wǒ de kuàidì;zhè shì wǒ de kuài dì,this is my mail;this is my parcel
+61,快递,kuàidì;kuài dì,express mail;mail;parcel
+62,对不起,duìbuqǐ;duì bu qǐ,to be sorry;i'm sorry
+63,没关系,méiguānxi;méi guān xi,It doesn't matter;It's alright
+64,再见,zàijiàn;zài jiàn,to see you around;see you around;good bye
+65,他是王经理,tā shì wángjīnglǐ;tā shì wáng jīng lǐ,He is Manager Wang
+66,小姐,xiǎojie;xiǎo jie,young lady;miss;ms
+67,女士,nǚshì;nǚ shì,lady;madam
+68,经理,jīnglǐ;jīng lǐ,manager
+69,大夫,dàifu;dài fu,doctor
+70,医生,yīshēng;yī shēng,doctor
+71,不是,búshì;bú shì,no
+72,他做什么工作,tā zuò shénme gōngzuò;tā zuò shén me gōng zuò,What kind of work does he do?；What does he do？
+73,做,zuò;zuò,to do
+74,工作,gōngzuò;gōng zuò,job; work
+75,司机,sījī;sī jī,driver
+76,忙,máng;máng,busy
+77,记者,jìzhě;jì zhě,reporter;journalist
+78,非常,fēicháng;fēi cháng,very;very much;extremely
+79,家庭主妇,jiātíngzhǔfù;jiā tíng zhǔ fù,housewife
+80,家庭,jiātíng;jiā tíng,family
+81,主妇,zhǔfù;zhǔ fù,housewife
+82,最,zuì;zuì,most;superlatively
+83,他是司机,tā shì sījī;tā shì sī jī,He is the driver
+84,他很忙,tā hěn máng;tā hěn máng,He is very busy
+85,他是记者,tā shì jìzhě;tā shì jì zhě,He is a journalist
+86,他是医生,tā shì yīshēng;tā shì yī shēng,He is a doctor
+87,他是经理,tā shì jīnglǐ;tā shì jīng lǐ,He is the manager
+88,他非常忙,tā fēicháng máng;tā fēi cháng máng,He is very busy;He is extremely busy
+89,她最忙,tā zuìmáng;tā zuì máng,She is the busiest
+90,服务员,fúwùyuán;fú wù yuán,attendant;waiter;waitress
+91,服务,fúwù;fú wù,to serve;to wait on 
+92,秘书,mìshū;mì shū,secretary
+93,厨师,chúshī;chú shī,chef
+94,累,lèi;lèi,tired;weary
+95,律师,lǜshī;lǜ shī,lawyer
+96,幸苦,xìngkǔ;xìng kǔ,toilsome;laborious
+97,运动员,yùndòngyuán;yùn dòng yuán,athlete
+98,运动,yùndòng;yùn dòng,to do sports
+99,快乐,kuàilè;kuài lè,happy;glad
+100,他很辛苦,tā hěn xīnkǔ;tā hěn xīn kǔ,He worked very hard.;He is very hardworking
